@@ -1,0 +1,42 @@
+<!DOCTYPE xml>
+<project name="LohnPapGenerator" default="generate">
+
+	<property name="papDir" value="src/de/powerproject/lohnpap/pap/" />
+
+	<target name="generate">
+		<antcall target="generatePap" />
+		<antcall target="generateJar" />
+	</target>
+
+	<target name="generatePap">
+		<delete dir="${papDir}" />
+		<mkdir dir="${papDir}" />
+		<java classname="de.powerproject.lohnpap.generator.Generator">
+			<arg value="${arg0}" />
+			<classpath>
+				<pathelement path="bin" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="generateJar">
+
+		<!-- clean build folder -->
+		<delete dir="build" />
+		<mkdir dir="build/classes" />
+		
+		<copy file="LICENSE" tofile="build/classes/LICENSE" />
+
+		<!-- build classes -->
+		<javac srcdir="${papDir}" destdir="build/classes"
+			includeantruntime="false" />
+
+		<!-- build jar file -->
+		<jar destfile="lohnsteuer.jar" basedir="build/classes" />
+
+		<!-- clean
+		<delete dir="build" /> -->
+
+	</target>
+
+</project>

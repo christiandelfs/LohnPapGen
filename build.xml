@@ -1,0 +1,23 @@
+<project name="LohnPapGeneratorBuild" default="compile" basedir=".">
+	
+  <description>
+  	LohnPapGeneratorBuild
+  </description>
+  
+  <property name="src" location="src/de/powerproject/lohnpap/generator"/>
+  <property name="bin" location="bin"/>
+	
+  <target name="init" depends="clean">
+    <tstamp/>
+    <mkdir dir="${bin}"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source">
+    <javac srcdir="${src}" destdir="${bin}" includeantruntime="false"/>
+  </target>
+
+  <target name="clean" description="clean up">
+    <delete dir="${bin}"/>
+  </target>
+	
+</project>
