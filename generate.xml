@@ -1,7 +1,7 @@
 <!DOCTYPE xml>
 <project name="LohnPapGenerator" default="generate">
 
-	<property name="papDir" value="src/de/powerproject/lohnpap/pap/" />
+	<property name="papDir" value="src/de/powerproject/lohnpap/pap" />
 
 	<target name="generate">
 		<antcall target="generatePap" />
@@ -9,8 +9,8 @@
 	</target>
 
 	<target name="generatePap">
-		<delete dir="${papDir}" />
-		<mkdir dir="${papDir}" />
+		<delete dir="${papDir}/${arg0}" />
+		<mkdir dir="${papDir}/${arg0}" />
 		<java classname="de.powerproject.lohnpap.generator.Generator">
 			<arg value="${arg0}" />
 			<classpath>
