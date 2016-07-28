@@ -42,7 +42,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class Generator {
 
 	private static boolean interfaceGenerated = true;
-	private static String codeLang = "JAVA";
+	private static String codeLang = "PHP";
 	private static List<String> codeLangList = Arrays.asList( "JAVA", "PHP" );
 
 	private static final Map<String, String> inputInterfaceVars = new HashMap<>();
