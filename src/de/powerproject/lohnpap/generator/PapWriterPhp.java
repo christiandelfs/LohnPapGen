@@ -31,13 +31,12 @@ class PapWriterPhp extends AbstractWriter {
 
 		writeln("<?php");
 		writeln();
-		writeln("namespace Kununu\\Services;");
+		writeln("namespace Services;");
 		writeln();
 		writeln("/**");
 		writeln(" * Klasse " + p.name);
 		writeln(" * ");
 		writeln(" * @author Christian Delfs");
-		writeln(" * @copyright  kununu GmbH");
 		writeln(" */");
 		writeln();
 		writeln("class " + p.name + " implements LohnsteuerInterface {");
@@ -49,13 +48,12 @@ class PapWriterPhp extends AbstractWriter {
 
 		writeln("<?php");
 		writeln();
-		writeln("namespace Kununu\\Services;");
+		writeln("namespace Services;");
 		writeln();
 		writeln("/**");
 		writeln(" * Interface LohnsteuerInterface");
 		writeln(" * ");
 		writeln(" * @author Christian Delfs");
-		writeln(" * @copyright  kununu GmbH");
 		writeln(" */");
 		writeln();
 		writeln("interface LohnsteuerInterface {");

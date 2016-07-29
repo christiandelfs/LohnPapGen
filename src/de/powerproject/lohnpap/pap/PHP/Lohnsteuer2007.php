@@ -1,12 +1,11 @@
 <?php
 
-namespace Kununu\Services;
+namespace Services;
 
 /**
  * Klasse Lohnsteuer2007
  * 
  * @author Christian Delfs
- * @copyright  kununu GmbH
  */
 
 class Lohnsteuer2007 implements LohnsteuerInterface {

@@ -1,12 +1,11 @@
 <?php
 
-namespace Kununu\Services;
+namespace Services;
 
 /**
  * Interface LohnsteuerInterface
  * 
  * @author Christian Delfs
- * @copyright  kununu GmbH
  */
 
 interface LohnsteuerInterface {

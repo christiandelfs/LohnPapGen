@@ -7,7 +7,6 @@ import java.util.Calendar;
 * Klasse Lohnsteuer
 *
 * @author     Christian Delfs
-* @copyright  kununu GmbH
 */
 
 public class Lohnsteuer {

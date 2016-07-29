@@ -3,9 +3,8 @@
 * Klasse BigDecimal
 *
 * @author     Christian Delfs
-* @copyright  kununu GmbH
 */
-namespace Kununu\Services;
+namespace Services;
 
 class BigDecimal
 {

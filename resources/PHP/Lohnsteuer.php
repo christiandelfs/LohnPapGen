@@ -1,12 +1,11 @@
 <?php
 
-namespace Kununu\Services;
+namespace Services;
 
 /**
 * Klasse Lohnsteuer
 *
 * @author     Christian Delfs
-* @copyright  kununu GmbH
 */
 
 class Lohnsteuer {
