@@ -91,6 +91,10 @@ class PapWriterJava extends AbstractWriter {
 		return "protected void " + methodName + "() {";
 	}
 	
+	public String writeExecMethod(String methodName) {
+		return methodName + "();";
+	}
+	
 	public String writeExec(String exec) {
 		return exec + ";";
 	}
@@ -101,6 +105,14 @@ class PapWriterJava extends AbstractWriter {
 	
 	public String writeVar(String type, String name, String def) {
 		return "protected " + type + " " + name + " = " + def + ";";
+	}
+	
+	public String writeOverride() {
+		return "@Override";
+	}
+	
+	public void writeInit() throws IOException {
+		
 	}
 
 	@Override
