@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Map.Entry;
 
 class PapWriterPhp extends AbstractWriter {
 
@@ -83,13 +84,7 @@ class PapWriterPhp extends AbstractWriter {
 	}
 	
 	public String writeConstant(String type, String name, String value) {
-		String valueReturn = value;
-		if(valueReturn.startsWith("{")) {
-			valueReturn = "array(" + pseudoToLang(valueReturn.substring(1, valueReturn.length() - 1)) + ")";
-		}else{
-			valueReturn = pseudoToLang(valueReturn);
-		}
-		return "protected static final $" + name + " = " + valueReturn + ";";
+		return "protected static $" + name + ";";// = " + value + "
 	}
 	
 	public String writeMainMethod() {
@@ -98,6 +93,10 @@ class PapWriterPhp extends AbstractWriter {
 	
 	public String writeMethod(String methodName) {
 		return "protected function " + methodName + "() {";
+	}
+	
+	public String writeExecMethod(String methodName) {
+		return "$this->" + methodName + "();";
 	}
 	
 	public String writeExec(String exec) {
@@ -110,7 +109,7 @@ class PapWriterPhp extends AbstractWriter {
 	
 	private String pseudoToLang(String code) {
 		final List<String> objects = Arrays.asList("BigDecimal");
-		final String codeClean = code.replaceAll("[\\t]+", "").replaceAll("(\\r\\n)+", "\\n").replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&");
+		final String codeClean = code.replaceAll("[\\t]+", "").replaceAll("(\\r\\n)+", "\\n").replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&");//.replaceAll("([^a-zA-Z0-9_][\\s]*)\\((.*\\(.*\\))\\)\\.","$1$2.")
 		final Pattern pattern = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9_]*$");
 		Matcher matcher;
 		StringBuilder codeReturn = new StringBuilder();
@@ -120,7 +119,7 @@ class PapWriterPhp extends AbstractWriter {
 		for (int i = 0; i < len; i++) {
 	    	final String c = Character.toString(codeClean.charAt(i));
 	    	if(c.matches("^[^a-zA-Z0-9_]$")) {
-	    		segs.add(codeClean.substring(lastPos, i));
+	    		if(i > lastPos) segs.add(codeClean.substring(lastPos, i));
 	    		segs.add(c);
 	    		lastPos = i + 1;
 	    	}
@@ -130,17 +129,19 @@ class PapWriterPhp extends AbstractWriter {
     	}
     	final int segLen = segs.size();
 		for(int i = 0;i < segLen;i++) {
-			final String prevSeg = (i == 0) ? "" : segs.get(i - 1);
+			//final String prevSeg = (i == 0) ? "" : segs.get(i - 1);
+			final String prevSeg = getPrevNonEmptySeg(segs,i);
 			final String seg = segs.get(i);
-			final String nextSeg = (i + 1 == segLen) ? "" : segs.get(i + 1);
+			//final String nextSeg = (i + 1 == segLen) ? "" : segs.get(i + 1);
+			final String nextSeg = getNextNonEmptySeg(segs,i);
 			if(pattern.matcher(seg).matches()) {
 				if(objects.contains(seg)) {
 					codeReturn.append(seg);
 				}else{
-					if(internalVars.containsKey(seg) || inputVars.containsKey(seg) || outputVars.containsKey(seg)) {
-						codeReturn.append("$" + seg);
+					if(otherVars.containsKey(seg)) {
+						codeReturn.append("$this->" + seg);
 					}else if(constVars.containsKey(seg)) {
-						codeReturn.append("self::$" + seg);
+						codeReturn.append("self::" + seg + "()");
 					}else{
 						codeReturn.append(seg);
 					}
@@ -153,6 +154,8 @@ class PapWriterPhp extends AbstractWriter {
 					}else{
 						codeReturn.append("->");
 					}
+				}else if(")".equals(prevSeg) || "]".equals(prevSeg)) {
+					codeReturn.append("->");
 				}else{
 					codeReturn.append(seg);
 				}
@@ -163,8 +166,53 @@ class PapWriterPhp extends AbstractWriter {
 		return codeReturn.toString();
 	}
 	
+	private String getPrevNonEmptySeg(List<String> segs, int idx) {
+		String segReturn = "";
+		for(int i = idx - 1;i >= 0;i--) {
+			if(!" ".equals(segs.get(i))) {
+				segReturn = segs.get(i);
+				break;
+			}
+		}
+		return segReturn;
+	}
+	
+	private String getNextNonEmptySeg(List<String> segs, int idx) {
+		String segReturn = "";
+		final int segLen = segs.size();
+		for(int i = idx + 1;i < segLen;i++) {
+			if(!" ".equals(segs.get(i))) {
+				segReturn = segs.get(i);
+				break;
+			}
+		}
+		return segReturn;
+	}
+	
 	public String writeVar(String type, String name, String def) {
-		return "protected $" + name + " = " + def + ";";
+		return "protected $" + name + ";";// = " + def + "
+	}
+	
+	public String writeOverride() {
+		return "";
+	}
+	
+	public void writeInit() throws IOException {
+		writeln("function __construct() {");
+		for (Entry<String, String> e : otherVars.entrySet()) {
+			writeln("$this->" + e.getKey() + "=" + pseudoToLang(e.getValue()) + ";");
+		}
+		for (Entry<String, String> e : constVars.entrySet()) {
+			String valueReturn = e.getValue();
+			if(valueReturn.startsWith("{")) {
+				valueReturn = "array(" + pseudoToLang(valueReturn.substring(1, valueReturn.length() - 1)) + ")";
+			}else{
+				valueReturn = pseudoToLang(valueReturn);
+			}
+			
+			writeln("self::$" + e.getKey() + "=" + valueReturn + ";");
+		}
+		writeln("}");
 	}
 
 	@Override
