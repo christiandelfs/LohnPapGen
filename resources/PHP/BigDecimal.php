@@ -8,22 +8,34 @@ namespace Services;
 
 class BigDecimal
 {
-	public static final $ZERO = 0;
-	public static final $ONE = 1;
-	public static final $TEN = 10;
-    public static final $MAX_SCALE = 2147483647;
-    public static final $ROUND_UP          = 1;
-    public static final $ROUND_DOWN        = 2;
-    public static final $ROUND_CEILING     = 3;
-    public static final $ROUND_FLOOR       = 4;
-    public static final $ROUND_HALF_UP     = 5;
-    public static final $ROUND_HALF_DOWN   = 6;
-    public static final $ROUND_HALF_EVEN   = 7;
-    public static final $ROUND_HALF_ODD    = 8;
-    public static final $ROUND_UNNECESSARY = 9;
-    public static final $STRING_FORMAT_REGEX  = '/^([-+])?([0-9]+)(\.([0-9]+))?(E([+-]?[0-9]+))?$/';
+	public static $ZERO = 0;
+	public static $ONE = 1;
+	public static $TEN = 10;
+    public static $MAX_SCALE = 2147483647;
+    public static $ROUND_UP          = 1;
+    public static $ROUND_DOWN        = 2;
+    public static $ROUND_CEILING     = 3;
+    public static $ROUND_FLOOR       = 4;
+    public static $ROUND_HALF_UP     = 5;
+    public static $ROUND_HALF_DOWN   = 6;
+    public static $ROUND_HALF_EVEN   = 7;
+    public static $ROUND_HALF_ODD    = 8;
+    public static $ROUND_UNNECESSARY = 9;
+    public static $STRING_FORMAT_REGEX  = '/^([-+])?([0-9]+)(\.([0-9]+))?(E([+-]?[0-9]+))?$/';
     private $value;
     private $scale;
+    
+    public static function ZERO() {
+    	return new BigDecimal(0);
+    }
+    
+    public static function ONE() {
+    	return new BigDecimal(1);
+    }
+    
+    public static function TEN() {
+    	return new BigDecimal(10);
+    }
     
     public function __construct($value, $scale = null)
     {
@@ -33,9 +45,9 @@ class BigDecimal
                 throw new \InvalidArgumentException(sprintf('Scale "%s" is grater than max "%s"', $scale, self::$MAX_SCALE));
             }
         }
-        if (!is_scalar($value)) {
-            throw new \InvalidArgumentException(sprintf('Value of type "%s" is not as scalar', gettype($value)));
-        }
+        //if (!is_scalar($value)) {
+            //throw new \InvalidArgumentException(sprintf('Value of type "%s" is not as scalar', gettype($value)));
+        //}
         $value = (string) $value;
         if (!preg_match(self::$STRING_FORMAT_REGEX, $value, $matches)) {
             throw new \InvalidArgumentException(sprintf('Wrong value "%s" format: expected "%s"', $value, self::$STRING_FORMAT_REGEX));
@@ -60,6 +72,10 @@ class BigDecimal
         }
         $this->value = $integer . ($scale ? ('.' . $fraction) : '');
         $this->scale = $scale;
+        //self::$ZERO = new BigDecimal(0);
+        //self::$ONE = new BigDecimal(1);
+        //self::$TEN = new BigDecimal(10);
+        
     }
     /**
      * @param $value
@@ -75,28 +91,29 @@ class BigDecimal
      *
      * @return static
      */
-    public static function zero()
+    /*public static function zero()
     {
         return new static(0, 0);
-    }
+    }*/
     /**
      * one
      *
      * @return static
      */
-    public function one()
+    /*public function one()
     {
         return new static(1, 0);
-    }
+    }*/
     /**
-     * one
+     * ten
      *
      * @return static
      */
-    public function ten()
+    /*public function ten()
     {
         return new static(10, 0);
-    }
+    }*/
+    
     public function value()
     {
         return $this->value;
@@ -122,6 +139,10 @@ class BigDecimal
         return strlen(ltrim($parts[0], '-'));
     }
     public function __toString()
+    {
+        return $this->value();
+    }
+    public function toString()
     {
         return $this->value();
     }
@@ -161,7 +182,7 @@ class BigDecimal
      * @return static
      * @throws \InvalidArgumentException
      */
-    public function divide(BigDecimal $divisor, $scale, $roundingMode)
+    public function divide(BigDecimal $divisor, $scale = 0, $roundingMode = null)
     {
         if ($divisor->signum() === 0) {
             throw new \InvalidArgumentException('Division by zero');
@@ -287,8 +308,9 @@ class BigDecimal
      * @param BigDecimal $number
      * @return int
      */
-    public function compareTo(BigDecimal $number)
+    public function compareTo($number)
     {
+    	$number = new BigDecimal($number);
         $scale = max($this->scale(), $number->scale());
         return bccomp($this->value, $number->value(), $scale);
     }
