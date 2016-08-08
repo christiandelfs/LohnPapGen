@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * 
  * @author Marcel Lehmann (https://github.com/MarcelLehmann/Lohnsteuer) 
- * @date Thu Jul 28 17:44:04 CEST 2016
+ * @date Mon Aug 08 09:30:58 CEST 2016
  * 
  */
 
@@ -356,150 +356,138 @@ public class Lohnsteuer2014 implements LohnsteuerInterface {
 	/* SETTER */
 
 	@Override
-	public void setPVS(int arg0) { this.PVS = arg0; }
-
-	@Override
-	public void setJVBEZ(BigDecimal arg0) { this.JVBEZ = arg0; }
-
-	@Override
-	public void setVBEZM(BigDecimal arg0) { this.VBEZM = arg0; }
-
-	@Override
-	public void setLZZ(int arg0) { this.LZZ = arg0; }
-
-	@Override
-	public void setALTER1(int arg0) { this.ALTER1 = arg0; }
-
-	@Override
-	public void setSTKL(int arg0) { this.STKL = arg0; }
-
-	@Override
-	public void setRE4(BigDecimal arg0) { this.RE4 = arg0; }
-
-	@Override
-	public void setJRE4ENT(BigDecimal arg0) { this.JRE4ENT = arg0; }
-
-	@Override
-	public void setVBS(BigDecimal arg0) { this.VBS = arg0; }
-
-	@Override
-	public void setR(int arg0) { this.R = arg0; }
-
-	@Override
-	public void setSONSTB(BigDecimal arg0) { this.SONSTB = arg0; }
-
-	@Override
-	public void setPKV(int arg0) { this.PKV = arg0; }
-
-	@Override
-	public void setPVZ(int arg0) { this.PVZ = arg0; }
-
-	@Override
-	public void setLZZHINZU(BigDecimal arg0) { this.LZZHINZU = arg0; }
-
-	@Override
-	public void setVBEZS(BigDecimal arg0) { this.VBEZS = arg0; }
-
-	@Override
-	public void setJRE4(BigDecimal arg0) { this.JRE4 = arg0; }
-
-	@Override
-	public void setSTERBE(BigDecimal arg0) { this.STERBE = arg0; }
-
-	@Override
-	public void setf(double arg0) { this.f = arg0; }
-
-	@Override
-	public void setENTSCH(BigDecimal arg0) { this.ENTSCH = arg0; }
-
-	@Override
 	public void setJHINZU(BigDecimal arg0) { this.JHINZU = arg0; }
-
-	@Override
-	public void setJFREIB(BigDecimal arg0) { this.JFREIB = arg0; }
-
-	@Override
-	public void setZKF(BigDecimal arg0) { this.ZKF = arg0; }
-
-	@Override
-	public void setVJAHR(int arg0) { this.VJAHR = arg0; }
-
-	@Override
-	public void setKRV(int arg0) { this.KRV = arg0; }
-
-	@Override
-	public void setAJAHR(int arg0) { this.AJAHR = arg0; }
-
-	@Override
-	public void setZMVB(int arg0) { this.ZMVB = arg0; }
-
-	@Override
-	public void setLZZFREIB(BigDecimal arg0) { this.LZZFREIB = arg0; }
-
-	@Override
-	public void setPKPV(BigDecimal arg0) { this.PKPV = arg0; }
-
-	@Override
-	public void setSONSTENT(BigDecimal arg0) { this.SONSTENT = arg0; }
-
-	@Override
-	public void setVMT(BigDecimal arg0) { this.VMT = arg0; }
 
 	@Override
 	public void setVKAPA(BigDecimal arg0) { this.VKAPA = arg0; }
 
 	@Override
+	public void setVBEZS(BigDecimal arg0) { this.VBEZS = arg0; }
+
+	@Override
 	public void setVBEZ(BigDecimal arg0) { this.VBEZ = arg0; }
+
+	@Override
+	public void setVJAHR(int arg0) { this.VJAHR = arg0; }
+
+	@Override
+	public void setJRE4ENT(BigDecimal arg0) { this.JRE4ENT = arg0; }
+
+	@Override
+	public void setPVS(int arg0) { this.PVS = arg0; }
+
+	@Override
+	public void setLZZ(int arg0) { this.LZZ = arg0; }
+
+	@Override
+	public void setKRV(int arg0) { this.KRV = arg0; }
+
+	@Override
+	public void setJFREIB(BigDecimal arg0) { this.JFREIB = arg0; }
+
+	@Override
+	public void setJVBEZ(BigDecimal arg0) { this.JVBEZ = arg0; }
+
+	@Override
+	public void setR(int arg0) { this.R = arg0; }
+
+	@Override
+	public void setPVZ(int arg0) { this.PVZ = arg0; }
+
+	@Override
+	public void setVBEZM(BigDecimal arg0) { this.VBEZM = arg0; }
+
+	@Override
+	public void setLZZFREIB(BigDecimal arg0) { this.LZZFREIB = arg0; }
+
+	@Override
+	public void setRE4(BigDecimal arg0) { this.RE4 = arg0; }
+
+	@Override
+	public void setPKPV(BigDecimal arg0) { this.PKPV = arg0; }
+
+	@Override
+	public void setSTKL(int arg0) { this.STKL = arg0; }
 
 	@Override
 	public void setaf(int arg0) { this.af = arg0; }
 
 	@Override
-	public void setF(double arg0) { /* required for newer calculator */ }
+	public void setf(double arg0) { this.f = arg0; }
 
 	@Override
-	public void setHINZUR(BigDecimal arg0) { /* required for newer calculator */ }
+	public void setVBS(BigDecimal arg0) { this.VBS = arg0; }
 
 	@Override
-	public void setWFUNDF(BigDecimal arg0) { /* required for newer calculator */ }
+	public void setLZZHINZU(BigDecimal arg0) { this.LZZHINZU = arg0; }
 
 	@Override
-	public void setAF(int arg0) { /* required for newer calculator */ }
+	public void setSONSTB(BigDecimal arg0) { this.SONSTB = arg0; }
+
+	@Override
+	public void setSTERBE(BigDecimal arg0) { this.STERBE = arg0; }
+
+	@Override
+	public void setAJAHR(int arg0) { this.AJAHR = arg0; }
+
+	@Override
+	public void setZKF(BigDecimal arg0) { this.ZKF = arg0; }
+
+	@Override
+	public void setJRE4(BigDecimal arg0) { this.JRE4 = arg0; }
+
+	@Override
+	public void setZMVB(int arg0) { this.ZMVB = arg0; }
+
+	@Override
+	public void setSONSTENT(BigDecimal arg0) { this.SONSTENT = arg0; }
+
+	@Override
+	public void setALTER1(int arg0) { this.ALTER1 = arg0; }
+
+	@Override
+	public void setPKV(int arg0) { this.PKV = arg0; }
+
+	@Override
+	public void setVMT(BigDecimal arg0) { this.VMT = arg0; }
+
+	@Override
+	public void setENTSCH(BigDecimal arg0) { this.ENTSCH = arg0; }
 
 	/* GETTER */
-
-	@Override
-	public BigDecimal getSTS() { return this.STS; }
 
 	@Override
 	public BigDecimal getVKVLZZ() { return this.VKVLZZ; }
 
 	@Override
-	public BigDecimal getSOLZV() { return this.SOLZV; }
-
-	@Override
-	public BigDecimal getVKVSONST() { return this.VKVSONST; }
+	public BigDecimal getSTS() { return this.STS; }
 
 	@Override
 	public BigDecimal getSTV() { return this.STV; }
 
 	@Override
-	public BigDecimal getSOLZS() { return this.SOLZS; }
-
-	@Override
-	public BigDecimal getBKS() { return this.BKS; }
-
-	@Override
-	public BigDecimal getSOLZLZZ() { return this.SOLZLZZ; }
-
-	@Override
-	public BigDecimal getBKV() { return this.BKV; }
+	public BigDecimal getLSTLZZ() { return this.LSTLZZ; }
 
 	@Override
 	public BigDecimal getBK() { return this.BK; }
 
 	@Override
-	public BigDecimal getLSTLZZ() { return this.LSTLZZ; }
+	public BigDecimal getSOLZV() { return this.SOLZV; }
+
+	@Override
+	public BigDecimal getBKS() { return this.BKS; }
+
+	@Override
+	public BigDecimal getBKV() { return this.BKV; }
+
+	@Override
+	public BigDecimal getVKVSONST() { return this.VKVSONST; }
+
+	@Override
+	public BigDecimal getSOLZLZZ() { return this.SOLZLZZ; }
+
+	@Override
+	public BigDecimal getSOLZS() { return this.SOLZS; }
 
 	/** PROGRAMMABLAUFPLAN, PAP Seite 12 */
 	@Override
