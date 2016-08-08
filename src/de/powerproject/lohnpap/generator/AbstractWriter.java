@@ -11,9 +11,7 @@ abstract class AbstractWriter implements Closeable,AbstractWriterInterface {
 
 	private FileWriter fw;
 	private int indent = 0;
-	protected Map<String, String> inputVars = new HashMap<>();
-	protected Map<String, String> outputVars = new HashMap<>();
-	protected Map<String, String> internalVars = new HashMap<>();
+	protected Map<String, String> otherVars = new HashMap<>();
 	protected Map<String, String> constVars = new HashMap<>();
 	
 	public AbstractWriter(String fileName) throws IOException {
@@ -75,16 +73,8 @@ abstract class AbstractWriter implements Closeable,AbstractWriterInterface {
 		fw.close();
 	}
 	
-	public void setInputVars(Map<String, String> inputVars) {
-		this.inputVars = inputVars;
-	}
-	
-	public void setOutputVars(Map<String, String> outputVars) {
-		this.outputVars = outputVars;
-	}
-	
-	public void setInternalVars(Map<String, String> internalVars) {
-		this.internalVars = internalVars;
+	public void setOtherVars(Map<String, String> otherVars) {
+		this.otherVars = otherVars;
 	}
 	
 	public void setConstVars(Map<String, String> constVars) {
