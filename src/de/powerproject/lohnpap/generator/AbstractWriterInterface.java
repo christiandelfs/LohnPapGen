@@ -35,21 +35,23 @@ public interface AbstractWriterInterface {
 	
 	public String writeMethod(String methodName);
 	
+	public String writeExecMethod(String methodName);
+	
 	public String writeExec(String exec);
 	
 	public String writeEval(String eval);
 	
 	public String writeVar(String type, String name, String def);
 	
+	public String writeOverride();
+	
+	public void writeInit() throws IOException;
+	
 	public void writeWriter(PapFile p) throws IOException;
 	
 	public void writeWriterInterface() throws IOException;
 	
-	public void setInputVars(Map<String, String> inputVars);
-	
-	public void setOutputVars(Map<String, String> outputVars);
-	
-	public void setInternalVars(Map<String, String> internalVars);
+	public void setOtherVars(Map<String, String> otherVars);
 	
 	public void setConstVars(Map<String, String> internalVars);
 	
