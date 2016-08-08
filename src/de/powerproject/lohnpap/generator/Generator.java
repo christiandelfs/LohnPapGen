@@ -45,9 +45,6 @@ public class Generator {
 	private static String codeLang = "PHP";
 	private static List<String> codeLangList = Arrays.asList( "JAVA", "PHP" );
 
-	private static final Map<String, String> inputInterfaceVars = new HashMap<>();
-	private static final Map<String, String> outputInterfaceVars = new HashMap<>();
-	
 	public static void main(String[] args) throws Exception {
 		
 		if(args.length > 0 && codeLangList.contains(args[0])) codeLang = args[0];
@@ -154,10 +151,13 @@ public class Generator {
     }
 	
 	private boolean variables, constants, methods, method;
+	private Map<String, String> inputInterfaceVars = new HashMap<>();
+	private Map<String, String> outputInterfaceVars = new HashMap<>();
 	private Map<String, String> inputVars = new HashMap<>();
 	private Map<String, String> outputVars = new HashMap<>();
 	private Map<String, String> internalVars = new HashMap<>();
 	private Map<String, String> constVars = new HashMap<>();
+	private Map<String, String> otherVars = new HashMap<>();
 	private String lastComment = null;
 
 	protected void printLastComment(AbstractWriterInterface writer) throws IOException {
@@ -179,6 +179,13 @@ public class Generator {
 	
 			try {
 				if ("PAP".equals(qName)) {
+					inputInterfaceVars = new HashMap<>();
+					outputInterfaceVars = new HashMap<>();
+					inputVars = new HashMap<>();
+					outputVars = new HashMap<>();
+					internalVars = new HashMap<>();
+					constVars = new HashMap<>();
+					otherVars = new HashMap<>();
 					String internalName = attributes.getValue("name");
 					Class<?>[] paramTypes = { PapFile.class, File.class, String.class };
 					Object[] params = { pf, getFile(path.getCanonicalPath(), "pap", codeLang), internalName };
@@ -198,7 +205,7 @@ public class Generator {
 					for (Entry<String, String> e : inputVars.entrySet()) {
 						pw.appendln();
 						if (inputInterfaceVars.containsKey(e.getKey())) {
-							pw.writeln("@Override");
+							pw.writeln(pw.writeOverride());
 						}
 						pw.writeln(e.getValue());
 					}
@@ -206,7 +213,7 @@ public class Generator {
 						String name = e.getKey();
 						if (!inputVars.containsKey(name)) {
 							pw.appendln();
-							pw.writeln("@Override");
+							pw.writeln(pw.writeOverride());
 							if (internalVars.containsKey(name)) {
 								pw.writeln(pw.writeSetMethodDef(e.getValue(), internalVars.get(name)));
 							} else {
@@ -221,7 +228,7 @@ public class Generator {
 					for (Entry<String, String> e : outputVars.entrySet()) {
 						pw.appendln();
 						if (outputInterfaceVars.containsKey(e.getKey())) {
-							pw.writeln("@Override");
+							pw.writeln(pw.writeOverride());
 						}
 						pw.writeln(e.getValue());
 					}
@@ -229,7 +236,7 @@ public class Generator {
 						String name = e.getKey();
 						if (!outputVars.containsKey(name)) {
 							pw.appendln();
-							pw.writeln("@Override");
+							pw.writeln(pw.writeOverride());
 							if (internalVars.containsKey(name)) {
 								pw.writeln(e.getValue() + " { return " + internalVars.get(name) + "; }");
 							} else {
@@ -240,10 +247,9 @@ public class Generator {
 	
 					pw.appendln();
 					
-					pw.setInputVars(inputVars);
-					pw.setOutputVars(outputVars);
-					pw.setInternalVars(internalVars);
+					pw.setOtherVars(otherVars);
 					pw.setConstVars(constVars);
+					pw.writeInit();
 	
 				} else if ("INPUT".equals(qName) || "OUTPUT".equals(qName) || "INTERNAL".equals(qName)) {
 					if (variables) {
@@ -287,25 +293,26 @@ public class Generator {
 								outputInterfaceVars.put(uname, pre);
 							}
 						}
+						otherVars.put(name,def);
 					}
 				} else if ("CONSTANT".equals(qName)) {
 					if (constants) {
 						String type = attributes.getValue("type");
 						String name = attributes.getValue("name");
 						String value = attributes.getValue("value");
-						constVars.put(name,"");
+						constVars.put(name,value);
 						pw.writeln(pw.writeConstant(type, name, value));
 					}
 				} else if ("MAIN".equals(qName)) {
 					if (methods) {
-						pw.writeln("@Override");
+						pw.writeln(pw.writeOverride());
 						pw.writeln(pw.writeMainMethod());
 						pw.incIndent();
 					}
 				} else if ("EXECUTE".equals(qName)) {
 					String method = attributes.getValue("method");
 					pw.appendln();
-					pw.write(method + "();");
+					pw.write(pw.writeExecMethod(method));
 				} else if ("METHOD".equals(qName)) {
 					String methodName = attributes.getValue("name");
 					pw.writeln(pw.writeMethod(methodName));
