@@ -153,6 +153,7 @@ public class Generator {
 	private boolean variables, constants, methods, method;
 	private Map<String, String> inputInterfaceVars = new HashMap<>();
 	private Map<String, String> outputInterfaceVars = new HashMap<>();
+	private Map<String, String> internalInterfaceVars = new HashMap<>();
 	private Map<String, String> inputVars = new HashMap<>();
 	private Map<String, String> outputVars = new HashMap<>();
 	private Map<String, String> internalVars = new HashMap<>();
@@ -181,6 +182,7 @@ public class Generator {
 				if ("PAP".equals(qName)) {
 					inputInterfaceVars = new HashMap<>();
 					outputInterfaceVars = new HashMap<>();
+					internalInterfaceVars = new HashMap<>();
 					inputVars = new HashMap<>();
 					outputVars = new HashMap<>();
 					internalVars = new HashMap<>();
@@ -246,6 +248,16 @@ public class Generator {
 					}
 	
 					pw.appendln();
+	
+					for (Entry<String, String> e : internalVars.entrySet()) {
+						pw.appendln();
+						if (internalInterfaceVars.containsKey(e.getKey())) {
+							pw.writeln(pw.writeOverride());
+						}
+						pw.writeln(e.getValue());
+					}
+	
+					pw.appendln();
 					
 					pw.setOtherVars(otherVars);
 					pw.setConstVars(constVars);
@@ -268,8 +280,13 @@ public class Generator {
 						}
 	
 						if ("INTERNAL".equals(qName)) {
-							internalVars.put(name, name);
+							String pre = pw.writeGetMethod(name, type);
+							internalVars.put(name, pw.writeGetMethodDef(pre, name));
 							printLastComment(pw);
+							if (piw != null) {
+								piw.writeln(pre + ";");
+								internalInterfaceVars.put(name, pre);
+							}
 						}
 	
 						pw.writeln(pw.writeVar(type, name, def));
