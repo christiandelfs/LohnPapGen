@@ -128,10 +128,11 @@ class BigDecimal
     /**
      * @param $scale
      * @return static
+     * @throws \InvalidArgumentException
      */
-    public function setScale($scale)
+    public function setScale($scale, $roundingMode = null)
     {
-        return new static($this->value(), $scale);
+    	return $this->round($scale, $roundingMode);
     }
     public function precision()
     {
@@ -187,8 +188,11 @@ class BigDecimal
         if ($divisor->signum() === 0) {
             throw new \InvalidArgumentException('Division by zero');
         }
-        $scale = min($this->scale + $divisor->scale(), self::$MAX_SCALE);
-        return new static(bcdiv($this->value, $divisor->value(), $scale), $scale);
+        if(!(is_int($scale) && $scale >= 0)) {
+        	$scale = min($this->scale + $divisor->scale(), self::$MAX_SCALE);
+        }
+        $result = new static(bcdiv($this->value, $divisor->value(), $scale),$scale);
+        return $result->round($scale, $roundingMode);
     }
     /**
      * @param $n
