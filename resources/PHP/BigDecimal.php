@@ -216,7 +216,7 @@ class BigDecimal
      */
     public function signum()
     {
-        return $this->compareTo(self::zero());
+        return $this->compareTo(self::ZERO());
     }
     /**
      * @return static
@@ -314,7 +314,7 @@ class BigDecimal
      */
     public function compareTo($number)
     {
-    	$number = new BigDecimal($number);
+    	//$number = new BigDecimal($number);
         $scale = max($this->scale(), $number->scale());
         return bccomp($this->value, $number->value(), $scale);
     }
