@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * 
  * @author Marcel Lehmann (https://github.com/MarcelLehmann/Lohnsteuer) 
- * @date Mon Aug 08 09:30:58 CEST 2016
+ * @date Mon Aug 15 15:06:01 CEST 2016
  * 
  */
 
@@ -235,4 +235,82 @@ public interface LohnsteuerInterface {
 	/** Für die weitergehende Berücksichtigung des Steuerfreibetrags nach dem DBA Türkei verfügbares ZVE <br>
 				über dem Grundfreibetrag bei der Berechnung der sonstigen Bezüge, in Cent */
 	public BigDecimal getWVFRBM();
+	public BigDecimal getALTE();
+	public BigDecimal getANP();
+	public BigDecimal getANTEIL1();
+	public BigDecimal getBMG();
+	public BigDecimal getBBGKVPV();
+	public BigDecimal getBBGRV();
+	public BigDecimal getDIFF();
+	public BigDecimal getEFA();
+	public BigDecimal getFVB();
+	public BigDecimal getFVBSO();
+	public BigDecimal getFVBZ();
+	public BigDecimal getFVBZSO();
+	public BigDecimal getGFB();
+	public BigDecimal getHBALTE();
+	public BigDecimal getHFVB();
+	public BigDecimal getHFVBZ();
+	public BigDecimal getHFVBZSO();
+	public int getJ();
+	public BigDecimal getJBMG();
+	public BigDecimal getJLFREIB();
+	public BigDecimal getJLHINZU();
+	public BigDecimal getJW();
+	public int getK();
+	public int getKENNVMT();
+	public BigDecimal getKFB();
+	public BigDecimal getKVSATZAG();
+	public BigDecimal getKVSATZAN();
+	public int getKZTAB();
+	public BigDecimal getLSTJAHR();
+	public BigDecimal getLST1();
+	public BigDecimal getLST2();
+	public BigDecimal getLST3();
+	public BigDecimal getLSTOSO();
+	public BigDecimal getLSTSO();
+	public BigDecimal getMIST();
+	public BigDecimal getPVSATZAG();
+	public BigDecimal getPVSATZAN();
+	public BigDecimal getRVSATZAN();
+	public BigDecimal getRW();
+	public BigDecimal getSAP();
+	public BigDecimal getSOLZFREI();
+	public BigDecimal getSOLZJ();
+	public BigDecimal getSOLZMIN();
+	public BigDecimal getST();
+	public BigDecimal getST1();
+	public BigDecimal getST2();
+	public BigDecimal getSTOVMT();
+	public BigDecimal getTBSVORV();
+	public BigDecimal getVBEZB();
+	public BigDecimal getVBEZBSO();
+	public BigDecimal getVHB();
+	public BigDecimal getVSP();
+	public BigDecimal getVSPN();
+	public BigDecimal getVSP1();
+	public BigDecimal getVSP2();
+	public BigDecimal getVSP3();
+	public BigDecimal getW1STKL5();
+	public BigDecimal getW2STKL5();
+	public BigDecimal getW3STKL5();
+	public BigDecimal getVSPMAX1();
+	public BigDecimal getVSPMAX2();
+	public BigDecimal getVSPO();
+	public BigDecimal getVSPREST();
+	public BigDecimal getVSPVOR();
+	public BigDecimal getX();
+	public BigDecimal getY();
+	public BigDecimal getZRE4();
+	public BigDecimal getZRE4J();
+	public BigDecimal getZRE4VP();
+	public BigDecimal getZTABFB();
+	public BigDecimal getZVBEZ();
+	public BigDecimal getZVBEZJ();
+	public BigDecimal getZVE();
+	public BigDecimal getZX();
+	public BigDecimal getZZX();
+	public BigDecimal getHOCH();
+	public BigDecimal getVERGL();
+	public BigDecimal getVKV();
 }

@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * 
  * @author Marcel Lehmann (https://github.com/MarcelLehmann/Lohnsteuer) 
- * @date Mon Aug 08 09:30:57 CEST 2016
+ * @date Mon Aug 15 15:06:00 CEST 2016
  * 
  */
 
@@ -373,6 +373,175 @@ public class Lohnsteuer2006 implements LohnsteuerInterface {
 
 	@Override
 	public BigDecimal getSOLZS() { return this.SOLZS; }
+
+
+	@Override
+	public BigDecimal getVSPREST() { return this.VSPREST; }
+
+	@Override
+	public BigDecimal getLST3() { return this.LST3; }
+
+	@Override
+	public BigDecimal getZTABFB() { return this.ZTABFB; }
+
+	@Override
+	public BigDecimal getLST2() { return this.LST2; }
+
+	@Override
+	public BigDecimal getLST1() { return this.LST1; }
+
+	@Override
+	public BigDecimal getZVE() { return this.ZVE; }
+
+	@Override
+	public BigDecimal getFVBZ() { return this.FVBZ; }
+
+	@Override
+	public BigDecimal getSOLZFREI() { return this.SOLZFREI; }
+
+	@Override
+	public BigDecimal getHFVB() { return this.HFVB; }
+
+	@Override
+	public BigDecimal getHOCH() { return this.HOCH; }
+
+	@Override
+	public BigDecimal getLSTJAHR() { return this.LSTJAHR; }
+
+	@Override
+	public BigDecimal getSOLZJ() { return this.SOLZJ; }
+
+	@Override
+	public BigDecimal getZZX() { return this.ZZX; }
+
+	@Override
+	public BigDecimal getANTEIL2() { return this.ANTEIL2; }
+
+	@Override
+	public BigDecimal getANTEIL1() { return this.ANTEIL1; }
+
+	@Override
+	public BigDecimal getVSPMAX2() { return this.VSPMAX2; }
+
+	@Override
+	public BigDecimal getDIFF() { return this.DIFF; }
+
+	@Override
+	public BigDecimal getVSPMAX1() { return this.VSPMAX1; }
+
+	@Override
+	public BigDecimal getZVBEZ() { return this.ZVBEZ; }
+
+	@Override
+	public BigDecimal getVSP() { return this.VSP; }
+
+	@Override
+	public BigDecimal getZX() { return this.ZX; }
+
+	@Override
+	public BigDecimal getEFA() { return this.EFA; }
+
+	@Override
+	public int getKENNZ() { return this.KENNZ; }
+
+	@Override
+	public BigDecimal getALTE() { return this.ALTE; }
+
+	@Override
+	public BigDecimal getANP() { return this.ANP; }
+
+	@Override
+	public BigDecimal getSAP() { return this.SAP; }
+
+	@Override
+	public BigDecimal getRW() { return this.RW; }
+
+	@Override
+	public BigDecimal getSOLZMIN() { return this.SOLZMIN; }
+
+	@Override
+	public BigDecimal getKFB() { return this.KFB; }
+
+	@Override
+	public int getJ() { return this.J; }
+
+	@Override
+	public int getK() { return this.K; }
+
+	@Override
+	public BigDecimal getJW() { return this.JW; }
+
+	@Override
+	public BigDecimal getVHB() { return this.VHB; }
+
+	@Override
+	public BigDecimal getVSPN() { return this.VSPN; }
+
+	@Override
+	public BigDecimal getZRE4VP1() { return this.ZRE4VP1; }
+
+	@Override
+	public BigDecimal getVSPO() { return this.VSPO; }
+
+	@Override
+	public BigDecimal getRE4LZZV() { return this.RE4LZZV; }
+
+	@Override
+	public BigDecimal getX() { return this.X; }
+
+	@Override
+	public BigDecimal getMIST() { return this.MIST; }
+
+	@Override
+	public BigDecimal getRE4LZZ() { return this.RE4LZZ; }
+
+	@Override
+	public BigDecimal getY() { return this.Y; }
+
+	@Override
+	public BigDecimal getVBEZB() { return this.VBEZB; }
+
+	@Override
+	public BigDecimal getBMG() { return this.BMG; }
+
+	@Override
+	public BigDecimal getVSPVOR() { return this.VSPVOR; }
+
+	@Override
+	public BigDecimal getST() { return this.ST; }
+
+	@Override
+	public BigDecimal getVSPKURZ() { return this.VSPKURZ; }
+
+	@Override
+	public int getKZTAB() { return this.KZTAB; }
+
+	@Override
+	public BigDecimal getZRE4() { return this.ZRE4; }
+
+	@Override
+	public BigDecimal getJBMG() { return this.JBMG; }
+
+	@Override
+	public BigDecimal getST2() { return this.ST2; }
+
+	@Override
+	public BigDecimal getST1() { return this.ST1; }
+
+	@Override
+	public BigDecimal getFVB() { return this.FVB; }
+
+	@Override
+	public BigDecimal getVERGL() { return this.VERGL; }
+
+	@Override
+	public BigDecimal getVSP1() { return this.VSP1; }
+
+	@Override
+	public BigDecimal getZRE4VP() { return this.ZRE4VP; }
+
+	@Override
+	public BigDecimal getVSP2() { return this.VSP2; }
 
 	/** PROGRAMMABLAUFPLAN 2006 */
 	@Override

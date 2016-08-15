@@ -421,6 +421,214 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 	
 	public function getSOLZS() { return $this->SOLZS; }
 
+
+	
+	public function getVSPREST() { return $this->VSPREST; }
+
+	
+	public function getZVBEZJ() { return $this->ZVBEZJ; }
+
+	
+	public function getKENNVMT() { return $this->KENNVMT; }
+
+	
+	public function getLST3() { return $this->LST3; }
+
+	
+	public function getZTABFB() { return $this->ZTABFB; }
+
+	
+	public function getLST2() { return $this->LST2; }
+
+	
+	public function getLST1() { return $this->LST1; }
+
+	
+	public function getZRE4OSO() { return $this->ZRE4OSO; }
+
+	
+	public function getZVE() { return $this->ZVE; }
+
+	
+	public function getFVBZ() { return $this->FVBZ; }
+
+	
+	public function getSOLZFREI() { return $this->SOLZFREI; }
+
+	
+	public function getHFVB() { return $this->HFVB; }
+
+	
+	public function getHOCH() { return $this->HOCH; }
+
+	
+	public function getLSTJAHR() { return $this->LSTJAHR; }
+
+	
+	public function getZRE4VMT() { return $this->ZRE4VMT; }
+
+	
+	public function getSOLZJ() { return $this->SOLZJ; }
+
+	
+	public function getZZX() { return $this->ZZX; }
+
+	
+	public function getLSTSO() { return $this->LSTSO; }
+
+	
+	public function getANTEIL2() { return $this->ANTEIL2; }
+
+	
+	public function getANTEIL1() { return $this->ANTEIL1; }
+
+	
+	public function getVSPMAX2() { return $this->VSPMAX2; }
+
+	
+	public function getDIFF() { return $this->DIFF; }
+
+	
+	public function getVSPMAX1() { return $this->VSPMAX1; }
+
+	
+	public function getZVBEZ() { return $this->ZVBEZ; }
+
+	
+	public function getJLHINZU() { return $this->JLHINZU; }
+
+	
+	public function getVSP() { return $this->VSP; }
+
+	
+	public function getZTABFBOSO() { return $this->ZTABFBOSO; }
+
+	
+	public function getZX() { return $this->ZX; }
+
+	
+	public function getEFA() { return $this->EFA; }
+
+	
+	public function getALTE() { return $this->ALTE; }
+
+	
+	public function getFVBZOSO() { return $this->FVBZOSO; }
+
+	
+	public function getANP() { return $this->ANP; }
+
+	
+	public function getHFVBZSO() { return $this->HFVBZSO; }
+
+	
+	public function getSAP() { return $this->SAP; }
+
+	
+	public function getRW() { return $this->RW; }
+
+	
+	public function getSOLZMIN() { return $this->SOLZMIN; }
+
+	
+	public function getKFB() { return $this->KFB; }
+
+	
+	public function getFVBZSO() { return $this->FVBZSO; }
+
+	
+	public function getJ() { return $this->J; }
+
+	
+	public function getHBALTE() { return $this->HBALTE; }
+
+	
+	public function getK() { return $this->K; }
+
+	
+	public function getFVBSO() { return $this->FVBSO; }
+
+	
+	public function getJW() { return $this->JW; }
+
+	
+	public function getVHB() { return $this->VHB; }
+
+	
+	public function getVSPN() { return $this->VSPN; }
+
+	
+	public function getVSPO() { return $this->VSPO; }
+
+	
+	public function getX() { return $this->X; }
+
+	
+	public function getMIST() { return $this->MIST; }
+
+	
+	public function getY() { return $this->Y; }
+
+	
+	public function getVBEZB() { return $this->VBEZB; }
+
+	
+	public function getBMG() { return $this->BMG; }
+
+	
+	public function getVSPVOR() { return $this->VSPVOR; }
+
+	
+	public function getST() { return $this->ST; }
+
+	
+	public function getVSPKURZ() { return $this->VSPKURZ; }
+
+	
+	public function getHFVBZ() { return $this->HFVBZ; }
+
+	
+	public function getKZTAB() { return $this->KZTAB; }
+
+	
+	public function getZRE4() { return $this->ZRE4; }
+
+	
+	public function getJLFREIB() { return $this->JLFREIB; }
+
+	
+	public function getJBMG() { return $this->JBMG; }
+
+	
+	public function getST2() { return $this->ST2; }
+
+	
+	public function getST1() { return $this->ST1; }
+
+	
+	public function getFVB() { return $this->FVB; }
+
+	
+	public function getVBEZBSO() { return $this->VBEZBSO; }
+
+	
+	public function getVERGL() { return $this->VERGL; }
+
+	
+	public function getVSP1() { return $this->VSP1; }
+
+	
+	public function getZRE4VP() { return $this->ZRE4VP; }
+
+	
+	public function getLSTOSO() { return $this->LSTOSO; }
+
+	
+	public function getVSP2() { return $this->VSP2; }
+
+	
+	public function getZRE4J() { return $this->ZRE4J; }
+
 	function __construct() {
 	$this->VSPREST=new BigDecimal(0);
 	$this->JHINZU=new BigDecimal(0);
