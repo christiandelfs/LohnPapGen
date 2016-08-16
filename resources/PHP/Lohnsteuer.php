@@ -35,12 +35,12 @@ class Lohnsteuer {
 			$incomeKv = $income->compareTo($lohnsteuer->getBBGKVPV()) == 1 ? $lohnsteuer->getBBGKVPV() : $income;
 			
 			if($calc['Krankenversicherung'] == 'privat versichert') {
+				$result['KrankenversicherungJahr'] = (new BigDecimal($calc['Praemie'],2))->multiply(new BigDecimal(12))->toString();
+				$result['PflegeversicherungJahr'] = "0.00";
+			}else{
 				//$result['KrankenversicherungJahr'] = $incomeKv->multiply($lohnsteuer->getKVSATZAN())->toString();
 				$result['KrankenversicherungJahr'] = $incomeKv->multiply($kvSatz)->toString();
 				$result['PflegeversicherungJahr'] = $incomeKv->multiply($lohnsteuer->getPVSATZAN())->toString();
-			}else{
-				$result['KrankenversicherungJahr'] = (new BigDecimal($calc['Praemie'],2))->multiply(new BigDecimal(12))->toString();
-				$result['PflegeversicherungJahr'] = "0.00";
 			}
 			
 			$incomeRv = $income->compareTo($lohnsteuer->getBBGRV()) == 1 ? $lohnsteuer->getBBGRV() : $income;
