@@ -1,6 +1,6 @@
 <?php
 
-namespace Kununu\Services;
+namespace Services;
 
 /**
 * Klasse Lohnsteuer
