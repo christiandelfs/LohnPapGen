@@ -665,10 +665,10 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 		$this->MZTABFB();
 		$this->MLSTJAHR();
 		$this->LSTJAHR = $this->ST;
-		$this->JW = $this->LSTJAHR->multiply(self::ZAHL100());
+		$this->JW = $this->LSTJAHR->multiply(self::$ZAHL100);
 		$this->UPANTEIL();
 		$this->LSTLZZ = $this->ANTEIL1;
-		if($this->ZKF->compareTo(self::ZAHL0()) == 1) {
+		if($this->ZKF->compareTo(self::$ZAHL0) == 1) {
 			$this->ZTABFB = $this->ZTABFB->add($this->KFB);
 			$this->MLSTJAHR();
 			$this->JBMG = $this->ST;
@@ -684,9 +684,9 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
          PAP Seite 10 */
 	protected function MRE4LZZ() {
 
-		if($this->VBEZ->compareTo(self::ZAHL0()) == 0) {
-			$this->FVBZ = self::ZAHL0();
-			$this->FVB = self::ZAHL0();
+		if($this->VBEZ->compareTo(self::$ZAHL0) == 0) {
+			$this->FVBZ = self::$ZAHL0;
+			$this->FVB = self::$ZAHL0;
 		} else {
 			if($this->VJAHR < 2006) {
 				$this->J = 1;
@@ -698,21 +698,21 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 				}
 			}
 			if($this->LZZ == 1) {
-				if((($this->STERBE->add($this->VKAPA))->compareTo(self::ZAHL0())) == 1) {
+				if((($this->STERBE->add($this->VKAPA))->compareTo(self::$ZAHL0)) == 1) {
 					$this->VBEZB = ($this->VBEZM->multiply(BigDecimal::valueOf($this->ZMVB)))->add($this->VBEZS);
-					$this->HFVB = BigDecimal::valueOf(self::TAB2()[$this->J] * 100);
-					$this->FVBZ = BigDecimal::valueOf(self::TAB3()[$this->J]);
+					$this->HFVB = BigDecimal::valueOf(self::$TAB2[$this->J] * 100);
+					$this->FVBZ = BigDecimal::valueOf(self::$TAB3[$this->J]);
 				} else {
 					$this->VBEZB = ($this->VBEZM->multiply(BigDecimal::valueOf($this->ZMVB)))->add($this->VBEZS);
-					$this->HFVB = BigDecimal::valueOf(self::TAB2()[$this->J] / 12 * $this->ZMVB * 100);
-					$this->FVBZ = (BigDecimal::valueOf(self::TAB3()[$this->J] / 12 * $this->ZMVB))->setScale(0, BigDecimal::$ROUND_UP);
+					$this->HFVB = BigDecimal::valueOf(self::$TAB2[$this->J] / 12 * $this->ZMVB * 100);
+					$this->FVBZ = (BigDecimal::valueOf(self::$TAB3[$this->J] / 12 * $this->ZMVB))->setScale(0, BigDecimal::$ROUND_UP);
 				}
 			} else {
-				$this->VBEZB = (($this->VBEZM->multiply(self::ZAHL12()))->add($this->VBEZS))->setScale(2, BigDecimal::$ROUND_DOWN);
-				$this->HFVB = BigDecimal::valueOf(self::TAB2()[$this->J] * 100);
-				$this->FVBZ = BigDecimal::valueOf(self::TAB3()[$this->J]);
+				$this->VBEZB = (($this->VBEZM->multiply(self::$ZAHL12))->add($this->VBEZS))->setScale(2, BigDecimal::$ROUND_DOWN);
+				$this->HFVB = BigDecimal::valueOf(self::$TAB2[$this->J] * 100);
+				$this->FVBZ = BigDecimal::valueOf(self::$TAB3[$this->J]);
 			}
-			$this->FVB = ($this->VBEZB->multiply(BigDecimal::valueOf(self::TAB1()[$this->J])))->setScale(0, BigDecimal::$ROUND_UP);
+			$this->FVB = ($this->VBEZB->multiply(BigDecimal::valueOf(self::$TAB1[$this->J])))->setScale(0, BigDecimal::$ROUND_UP);
 			if($this->FVB->compareTo($this->HFVB) == 1) {
 				$this->FVB = $this->HFVB;
 			} else {
@@ -722,7 +722,7 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 			$this->FVB = $this->ANTEIL2;
 		}
 		if($this->ALTER1 == 0) {
-			$this->ALTE = self::ZAHL0();
+			$this->ALTE = self::$ZAHL0;
 		} else {
 			if($this->AJAHR < 2006) {
 				$this->K = 1;
@@ -734,8 +734,8 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 				}
 			}
 			$this->BMG = $this->RE4->subtract($this->VBEZ);
-			$this->ALTE = ($this->BMG->multiply(BigDecimal::valueOf(self::TAB4()[$this->K])))->setScale(0, BigDecimal::$ROUND_UP);
-			$this->JW = BigDecimal::valueOf(self::TAB5()[$this->K] * 100);
+			$this->ALTE = ($this->BMG->multiply(BigDecimal::valueOf(self::$TAB4[$this->K])))->setScale(0, BigDecimal::$ROUND_UP);
+			$this->JW = BigDecimal::valueOf(self::$TAB5[$this->K] * 100);
 			$this->UPANTEIL();
 			if($this->ALTE->compareTo($this->ANTEIL2) == 1) {
 				$this->ALTE = $this->ANTEIL2;
@@ -749,9 +749,9 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	protected function MRE4() {
 
 		if($this->LZZ == 1) {
-			$this->ZRE4 = $this->RE4LZZ->divide(self::ZAHL100(), 2, BigDecimal::$ROUND_DOWN);
-			$this->ZRE4VP = $this->RE4LZZV->divide(self::ZAHL100(), 2, BigDecimal::$ROUND_DOWN);
-			$this->ZVBEZ = ($this->VBEZ->subtract($this->FVB))->divide(self::ZAHL100(), 2, BigDecimal::$ROUND_DOWN);
+			$this->ZRE4 = $this->RE4LZZ->divide(self::$ZAHL100, 2, BigDecimal::$ROUND_DOWN);
+			$this->ZRE4VP = $this->RE4LZZV->divide(self::$ZAHL100, 2, BigDecimal::$ROUND_DOWN);
+			$this->ZVBEZ = ($this->VBEZ->subtract($this->FVB))->divide(self::$ZAHL100, 2, BigDecimal::$ROUND_DOWN);
 		} else {
 			if($this->LZZ == 2) {
 				$this->ZRE4 = (($this->RE4LZZ->add(BigDecimal::valueOf(0.67)))->multiply(BigDecimal::valueOf(0.12)))->setScale(2, BigDecimal::$ROUND_DOWN);
@@ -769,12 +769,12 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 				}
 			}
 		}
-		if($this->ZRE4->compareTo(self::ZAHL0()) == -1) {
-			$this->ZRE4 = self::ZAHL0();
+		if($this->ZRE4->compareTo(self::$ZAHL0) == -1) {
+			$this->ZRE4 = self::$ZAHL0;
 		} else {
 		}
-		if($this->ZVBEZ->compareTo(self::ZAHL0()) == -1) {
-			$this->ZVBEZ = self::ZAHL0();
+		if($this->ZVBEZ->compareTo(self::$ZAHL0) == -1) {
+			$this->ZVBEZ = self::$ZAHL0;
 		} else {
 		}
 	}
@@ -783,8 +783,8 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
          PAP Seite 13 */
 	protected function MZTABFB() {
 
-		$this->ANP = self::ZAHL0();
-		if($this->ZVBEZ->compareTo(self::ZAHL0()) == 1) {
+		$this->ANP = self::$ZAHL0;
+		if($this->ZVBEZ->compareTo(self::$ZAHL0) == 1) {
 			if($this->ZVBEZ->compareTo($this->FVBZ) == -1) {/** Fehler im PAP? double -> int, Nachkommastellen abschneiden */
 				$this->FVBZ = $this->ZVBEZ->setScale(0, BigDecimal::$ROUND_DOWN);
 			} else {
@@ -792,7 +792,7 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 		} else {
 		}
 		if($this->STKL < 6) {
-			if($this->ZVBEZ->compareTo(self::ZAHL0()) == 1) {
+			if($this->ZVBEZ->compareTo(self::$ZAHL0) == 1) {
 				if(($this->ZVBEZ->subtract($this->FVBZ))->compareTo(BigDecimal::valueOf(102)) == -1) {/** Fehler im PAP? double -> int, Nachkommastellen abschneiden */
 					$this->ANP = ($this->ZVBEZ->subtract($this->FVBZ))->setScale(0, BigDecimal::$ROUND_DOWN);
 				} else {
@@ -832,7 +832,7 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 						$this->SAP = BigDecimal::valueOf(36);
 						$this->KFB = ($this->ZKF->multiply(BigDecimal::valueOf(2904)))->setScale(0, BigDecimal::$ROUND_DOWN);
 					} else {
-						$this->KFB = self::ZAHL0();
+						$this->KFB = self::$ZAHL0;
 					}
 				}
 			}
@@ -847,12 +847,12 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 		if($this->STKL < 5) {
 			$this->UPEVP();
 		} else {
-			$this->VSP = self::ZAHL0();
+			$this->VSP = self::$ZAHL0;
 		}/** ZVE ist in EURO, ZRE4 in EURO,Cent */
 		$this->ZVE = ($this->ZRE4->subtract($this->ZTABFB)->subtract($this->VSP))->setScale(0, BigDecimal::$ROUND_DOWN);
-		if($this->ZVE->compareTo(self::ZAHL1()) == -1) {
-			$this->ZVE = self::ZAHL0();
-			$this->X = self::ZAHL0();
+		if($this->ZVE->compareTo(self::$ZAHL1) == -1) {
+			$this->ZVE = self::$ZAHL0;
+			$this->X = self::$ZAHL0;
 		} else {
 			$this->X = $this->ZVE->divide(BigDecimal::valueOf($this->KZTAB), 0, BigDecimal::$ROUND_DOWN);
 		}
@@ -868,7 +868,7 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	protected function UPEVP() {
 
 		if($this->KRV == 1) {
-			$this->VSP1 = self::ZAHL0();
+			$this->VSP1 = self::$ZAHL0;
 		} else {
 			if($this->ZRE4VP->compareTo(BigDecimal::valueOf(63000)) == 1) {
 				$this->ZRE4VP = BigDecimal::valueOf(63000);
@@ -927,8 +927,8 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 		} else {
 			$this->VSPVOR = $this->VSPVOR->subtract($this->ZRE4VP->multiply(BigDecimal::valueOf(0.16)));
 		}
-		if($this->VSPVOR->compareTo(self::ZAHL0()) == -1) {
-			$this->VSPVOR = self::ZAHL0();
+		if($this->VSPVOR->compareTo(self::$ZAHL0) == -1) {
+			$this->VSPVOR = self::$ZAHL0;
 		} else {
 		}
 		if($this->VSPO->compareTo($this->VSPVOR) == 1) {
@@ -936,7 +936,7 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 			$this->VSPREST = $this->VSPO->subtract($this->VSPVOR);
 			if($this->VSPREST->compareTo($this->VSPMAX1) == 1) {
 				$this->VSP = $this->VSP->add($this->VSPMAX1);
-				$this->VSPREST = ($this->VSPREST->subtract($this->VSPMAX1))->divide(self::ZAHL2(), 2, BigDecimal::$ROUND_UP);
+				$this->VSPREST = ($this->VSPREST->subtract($this->VSPMAX1))->divide(self::$ZAHL2, 2, BigDecimal::$ROUND_UP);
 				if($this->VSPREST->compareTo($this->VSPMAX2) == 1) {
 					$this->VSP = ($this->VSP->add($this->VSPMAX2))->setScale(0, BigDecimal::$ROUND_UP);
 				} else {
@@ -987,7 +987,7 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 		$this->X = $this->ZX->multiply(BigDecimal::valueOf(0.75));
 		$this->UPTAB05();
 		$this->ST2 = $this->ST;
-		$this->DIFF = ($this->ST1->subtract($this->ST2))->multiply(self::ZAHL2());
+		$this->DIFF = ($this->ST1->subtract($this->ST2))->multiply(self::$ZAHL2);
 		$this->MIST = ($this->ZX->multiply(BigDecimal::valueOf(0.15)))->setScale(0, BigDecimal::$ROUND_DOWN);
 		if($this->MIST->compareTo($this->DIFF) == 1) {
 			$this->ST = $this->MIST;
@@ -1008,18 +1008,18 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 				$this->SOLZJ = $this->SOLZMIN;
 			} else {
 			}
-			$this->JW = $this->SOLZJ->multiply(self::ZAHL100())->setScale(0, BigDecimal::$ROUND_DOWN);
+			$this->JW = $this->SOLZJ->multiply(self::$ZAHL100)->setScale(0, BigDecimal::$ROUND_DOWN);
 			$this->UPANTEIL();
 			$this->SOLZLZZ = $this->ANTEIL1;
 		} else {
-			$this->SOLZLZZ = self::ZAHL0();
+			$this->SOLZLZZ = self::$ZAHL0;
 		}
 		if($this->R > 0) {
-			$this->JW = $this->JBMG->multiply(self::ZAHL100());
+			$this->JW = $this->JBMG->multiply(self::$ZAHL100);
 			$this->UPANTEIL();
 			$this->BK = $this->ANTEIL1;
 		} else {
-			$this->BK = self::ZAHL0();
+			$this->BK = self::$ZAHL0;
 		}
 	}
 
@@ -1032,15 +1032,15 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 			$this->ANTEIL2 = $this->JW;
 		} else {
 			if($this->LZZ == 2) {
-				$this->ANTEIL1 = $this->JW->divide(self::ZAHL12(), 0, BigDecimal::$ROUND_DOWN);
-				$this->ANTEIL2 = $this->JW->divide(self::ZAHL12(), 0, BigDecimal::$ROUND_UP);
+				$this->ANTEIL1 = $this->JW->divide(self::$ZAHL12, 0, BigDecimal::$ROUND_DOWN);
+				$this->ANTEIL2 = $this->JW->divide(self::$ZAHL12, 0, BigDecimal::$ROUND_UP);
 			} else {
 				if($this->LZZ == 3) {
-					$this->ANTEIL1 = ($this->JW->multiply(self::ZAHL7()))->divide(self::ZAHL360(), 0, BigDecimal::$ROUND_DOWN);
-					$this->ANTEIL2 = ($this->JW->multiply(self::ZAHL7()))->divide(self::ZAHL360(), 0, BigDecimal::$ROUND_UP);
+					$this->ANTEIL1 = ($this->JW->multiply(self::$ZAHL7))->divide(self::$ZAHL360, 0, BigDecimal::$ROUND_DOWN);
+					$this->ANTEIL2 = ($this->JW->multiply(self::$ZAHL7))->divide(self::$ZAHL360, 0, BigDecimal::$ROUND_UP);
 				} else {
-					$this->ANTEIL1 = $this->JW->divide(self::ZAHL360(), 0, BigDecimal::$ROUND_DOWN);
-					$this->ANTEIL2 = $this->JW->divide(self::ZAHL360(), 0, BigDecimal::$ROUND_UP);
+					$this->ANTEIL1 = $this->JW->divide(self::$ZAHL360, 0, BigDecimal::$ROUND_DOWN);
+					$this->ANTEIL2 = $this->JW->divide(self::$ZAHL360, 0, BigDecimal::$ROUND_UP);
 				}
 			}
 		}
@@ -1050,32 +1050,32 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
          PAP Seite 21 */
 	protected function MSONST() {
 
-		if($this->SONSTB->compareTo(self::ZAHL0()) == 1) {
+		if($this->SONSTB->compareTo(self::$ZAHL0) == 1) {
 			$this->LZZ = 1;
 			$this->VBEZ = $this->JVBEZ;
 			$this->RE4 = $this->JRE4;
 			$this->MRE4LZZ();
 			$this->MRE4LZZ2();
 			$this->MLSTJAHR();
-			$this->LST1 = $this->ST->multiply(self::ZAHL100());
+			$this->LST1 = $this->ST->multiply(self::$ZAHL100);
 			$this->VBEZ = $this->JVBEZ->add($this->VBS);
 			$this->RE4 = $this->JRE4->add($this->SONSTB);
 			$this->VBEZS = $this->VBEZS->add($this->STERBE);
 			$this->MRE4LZZ();
 			$this->MRE4LZZ2();
 			$this->MLSTJAHR();
-			$this->LST2 = $this->ST->multiply(self::ZAHL100());
+			$this->LST2 = $this->ST->multiply(self::$ZAHL100);
 			$this->STS = $this->LST2->subtract($this->LST1);
-			$this->SOLZS = $this->STS->multiply(BigDecimal::valueOf(5.5))->divide(self::ZAHL100(), 0, BigDecimal::$ROUND_DOWN);
+			$this->SOLZS = $this->STS->multiply(BigDecimal::valueOf(5.5))->divide(self::$ZAHL100, 0, BigDecimal::$ROUND_DOWN);
 			if($this->R > 0) {
 				$this->BKS = $this->STS;
 			} else {
-				$this->BKS = self::ZAHL0();
+				$this->BKS = self::$ZAHL0;
 			}
 		} else {
-			$this->STS = self::ZAHL0();
-			$this->SOLZS = self::ZAHL0();
-			$this->BKS = self::ZAHL0();
+			$this->STS = self::$ZAHL0;
+			$this->SOLZS = self::$ZAHL0;
+			$this->BKS = self::$ZAHL0;
 		}
 	}
 
@@ -1093,14 +1093,14 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
          PAP Seite 22 */
 	protected function MVMT() {
 
-		if(($this->VMT->add($this->VKAPA))->compareTo(self::ZAHL0()) == 1) {
+		if(($this->VMT->add($this->VKAPA))->compareTo(self::$ZAHL0) == 1) {
 			$this->LZZ = 1;
 			$this->VBEZ = $this->JVBEZ->add($this->VBS);
 			$this->RE4 = $this->JRE4->add($this->SONSTB);
 			$this->MRE4LZZ();
 			$this->MRE4LZZ2();
 			$this->MLSTJAHR();
-			$this->LST1 = $this->ST->multiply(self::ZAHL100());
+			$this->LST1 = $this->ST->multiply(self::$ZAHL100);
 			$this->VMT = $this->VMT->add($this->VKAPA);
 			$this->VBEZS = $this->VBEZS->add($this->VKAPA);
 			$this->VBEZ = $this->VBEZ->add($this->VKAPA);
@@ -1110,41 +1110,41 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 			$this->KENNZ = 1;
 			$this->ZRE4VP1 = $this->ZRE4VP;
 			$this->MLSTJAHR();
-			$this->LST3 = $this->ST->multiply(self::ZAHL100());
+			$this->LST3 = $this->ST->multiply(self::$ZAHL100);
 			$this->VBEZ = $this->VBEZ->subtract($this->VKAPA);
 			$this->RE4 = $this->JRE4->add($this->SONSTB);
 			$this->MRE4LZZ();
-			if(($this->RE4->subtract($this->JFREIB)->add($this->JHINZU))->compareTo(self::ZAHL0()) == -1) {
+			if(($this->RE4->subtract($this->JFREIB)->add($this->JHINZU))->compareTo(self::$ZAHL0) == -1) {
 				$this->RE4 = $this->RE4->subtract($this->JFREIB)->add($this->JHINZU);
-				$this->JFREIB = self::ZAHL0();
-				$this->JHINZU = self::ZAHL0();
-				$this->RE4 = ($this->RE4->add($this->VMT))->divide(self::ZAHL5(), 0, BigDecimal::$ROUND_DOWN);
+				$this->JFREIB = self::$ZAHL0;
+				$this->JHINZU = self::$ZAHL0;
+				$this->RE4 = ($this->RE4->add($this->VMT))->divide(self::$ZAHL5, 0, BigDecimal::$ROUND_DOWN);
 				$this->MRE4LZZ2();
 				$this->MLSTJAHR();
-				$this->LST2 = $this->ST->multiply(self::ZAHL100());
-				$this->STV = $this->LST2->multiply(self::ZAHL5());
+				$this->LST2 = $this->ST->multiply(self::$ZAHL100);
+				$this->STV = $this->LST2->multiply(self::$ZAHL5);
 			} else {
-				$this->RE4 = $this->RE4->add($this->VMT->divide(self::ZAHL5(), 0, BigDecimal::$ROUND_DOWN));
+				$this->RE4 = $this->RE4->add($this->VMT->divide(self::$ZAHL5, 0, BigDecimal::$ROUND_DOWN));
 				$this->MRE4LZZ2();
 				$this->MLSTJAHR();
-				$this->LST2 = $this->ST->multiply(self::ZAHL100());
-				$this->STV = ($this->LST2->subtract($this->LST1))->multiply(self::ZAHL5());
+				$this->LST2 = $this->ST->multiply(self::$ZAHL100);
+				$this->STV = ($this->LST2->subtract($this->LST1))->multiply(self::$ZAHL5);
 			}
 			$this->LST3 = $this->LST3->subtract($this->LST1);
 			if($this->LST3->compareTo($this->STV) == -1) {
 				$this->STV = $this->LST3;
 			} else {
 			}
-			$this->SOLZV = ($this->STV->multiply(BigDecimal::valueOf(5.5)))->divide(self::ZAHL100(), 0, BigDecimal::$ROUND_DOWN);
+			$this->SOLZV = ($this->STV->multiply(BigDecimal::valueOf(5.5)))->divide(self::$ZAHL100, 0, BigDecimal::$ROUND_DOWN);
 			if($this->R > 0) {
 				$this->BKV = $this->STV;
 			} else {
-				$this->BKV = self::ZAHL0();
+				$this->BKV = self::$ZAHL0;
 			}
 		} else {
-			$this->STV = self::ZAHL0();
-			$this->SOLZV = self::ZAHL0();
-			$this->BKV = self::ZAHL0();
+			$this->STV = self::$ZAHL0;
+			$this->SOLZV = self::$ZAHL0;
+			$this->BKV = self::$ZAHL0;
 		}
 	}
 
@@ -1153,7 +1153,7 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	protected function UPTAB05() {
 
 		if($this->X->compareTo(BigDecimal::valueOf(7665)) == -1) {
-			$this->ST = self::ZAHL0();
+			$this->ST = self::$ZAHL0;
 		} else {
 			if($this->X->compareTo(BigDecimal::valueOf(12740)) == -1) {
 				$this->Y = ($this->X->subtract(BigDecimal::valueOf(7664)))->divide(BigDecimal::valueOf(10000), 6, BigDecimal::$ROUND_DOWN);
