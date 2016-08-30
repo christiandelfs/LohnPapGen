@@ -132,7 +132,8 @@ class BigDecimal
      */
     public function setScale($scale, $roundingMode = null)
     {
-    	return $this->round($scale, $roundingMode);
+    	if($roundingMode == null) return new static($this->value, $scale);
+    	else return $this->doround($scale, $roundingMode);
     }
     public function precision()
     {
@@ -174,25 +175,47 @@ class BigDecimal
      */
     public function multiply(BigDecimal $multiplier)
     {
-        $scale = min($this->scale + $multiplier->scale(), self::$MAX_SCALE);
-        return new static(bcmul($this->value, $multiplier->value(), $scale), $scale);
+        $value = bcmul($this->value, $multiplier->value(), 64);
+        $value = explode('.',$value);
+        $fraction = count($value) == 1 ? '' : rtrim($value[1], '0');
+        $scale = strlen($fraction);
+        $value = $value[0] . (strlen($fraction) == 0 ? '' : '.' . $fraction);
+        return new static($value,$scale);
     }
     /**
      * @param BigDecimal $divisor
      *
-     * @return static
+     * @return BigDecimal
      * @throws \InvalidArgumentException
      */
-    public function divide(BigDecimal $divisor, $scale = 0, $roundingMode = null)
+    public function divide(BigDecimal $divisor, $scale = null, $roundingMode = null)
     {
         if ($divisor->signum() === 0) {
             throw new \InvalidArgumentException('Division by zero');
         }
+        $value = bcdiv($this->value, $divisor->value(), 64);
+        $value = explode('.',$value);
+        $fraction = count($value) == 1 ? '' : rtrim($value[1], '0');
+        $value = $value[0] . (strlen($fraction) == 0 ? '' : '.' . $fraction);
         if(!(is_int($scale) && $scale >= 0)) {
-        	$scale = min($this->scale + $divisor->scale(), self::$MAX_SCALE);
+        	$scale = strlen($fraction);
         }
-        $result = new static(bcdiv($this->value, $divisor->value(), $scale),$scale);
-        return $result->round($scale, $roundingMode);
+        if($roundingMode == null) return new static($value, $scale);
+        else return (new static($value))->doround($scale, $roundingMode);
+    }
+    
+    public function doround($scale, $roundMode)
+    {
+    	$value = bcmul($this->value,pow(10,$scale),64);
+    	switch($roundMode) {
+    		case self::$ROUND_UP:
+    			$value = ceil($value);
+    			break;
+    		case self::$ROUND_DOWN:
+    			$value = floor($value);
+    			break;
+    	}
+    	return new static(bcdiv($value,pow(10,$scale),$scale),$scale);
     }
     /**
      * @param $n
