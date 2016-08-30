@@ -141,7 +141,7 @@ class PapWriterPhp extends AbstractWriter {
 					if(otherVars.containsKey(seg)) {
 						codeReturn.append("$this->" + seg);
 					}else if(constVars.containsKey(seg)) {
-						codeReturn.append("self::" + seg + "()");
+						codeReturn.append("self::$" + seg);
 					}else{
 						codeReturn.append(seg);
 					}
