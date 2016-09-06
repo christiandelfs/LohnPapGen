@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -108,14 +110,17 @@ class PapWriterPhp extends AbstractWriter {
 	}
 	
 	private String pseudoToLang(String code) {
-		final List<String> objects = Arrays.asList("BigDecimal");
-		final String codeClean = code.replaceAll("[\\t]+", "").replaceAll("(\\r\\n)+", "\\n").replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&");//.replaceAll("([^a-zA-Z0-9_][\\s]*)\\((.*\\(.*\\))\\)\\.","$1$2.")
+		//final List<String> objects = Arrays.asList("BigDecimal");
+		Map<String, List<String>> objects = new HashMap<String, List<String>>();
+		objects.put("BigDecimal",Arrays.asList("ZERO","ONE","TEN"));
+		boolean staticObjectMethod = false;
+		String codeClean = code.replaceAll("[\\t]+", "").replaceAll("(\\r\\n)+", "\\n").replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&");//.replaceAll("([^a-zA-Z0-9_][\\s]*)\\((.*\\(.*\\))\\)\\.","$1$2.")
 		final Pattern pattern = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9_]*$");
 		Matcher matcher;
-		StringBuilder codeReturn = new StringBuilder();
+		final StringBuilder codeReturn = new StringBuilder();
 		final int len = codeClean.length();
 		int lastPos = 0;
-		List<String> segs = new ArrayList<String>();
+		final List<String> segs = new ArrayList<String>();
 		for (int i = 0; i < len; i++) {
 	    	final String c = Character.toString(codeClean.charAt(i));
 	    	if(c.matches("^[^a-zA-Z0-9_]$")) {
@@ -127,6 +132,8 @@ class PapWriterPhp extends AbstractWriter {
     	if(lastPos < len) {
     		segs.add(codeClean.substring(lastPos, len));
     	}
+    	lastPos = 0;
+    	int parentheses = 0;
     	final int segLen = segs.size();
 		for(int i = 0;i < segLen;i++) {
 			//final String prevSeg = (i == 0) ? "" : segs.get(i - 1);
@@ -135,7 +142,7 @@ class PapWriterPhp extends AbstractWriter {
 			//final String nextSeg = (i + 1 == segLen) ? "" : segs.get(i + 1);
 			final String nextSeg = getNextNonEmptySeg(segs,i);
 			if(pattern.matcher(seg).matches()) {
-				if(objects.contains(seg)) {
+				if(objects.containsKey(seg)) {
 					codeReturn.append(seg);
 				}else{
 					if(otherVars.containsKey(seg)) {
@@ -144,12 +151,19 @@ class PapWriterPhp extends AbstractWriter {
 						codeReturn.append("self::$" + seg);
 					}else{
 						codeReturn.append(seg);
+						if(staticObjectMethod) {
+							codeReturn.append("()");
+							staticObjectMethod = false;
+						}
 					}
 				}
 			}else if(".".equals(seg)){
 				if(pattern.matcher(prevSeg).matches()) {
-					if(objects.contains(prevSeg)) {
-						if(nextSeg.substring(0,1).matches("^[a-z]{1,1}")) codeReturn.append("::");
+					if(objects.containsKey(prevSeg)) {
+						if(objects.get(prevSeg).contains(nextSeg)) {
+							codeReturn.append("::");
+							staticObjectMethod = true;
+						}else if(nextSeg.substring(0,1).matches("^[a-z]{1,1}$")) codeReturn.append("::");
 						else codeReturn.append("::$");
 					}else{
 						codeReturn.append("->");
@@ -158,6 +172,16 @@ class PapWriterPhp extends AbstractWriter {
 					codeReturn.append("->");
 				}else{
 					codeReturn.append(seg);
+				}
+			}else if("(".equals(seg)){
+				if(pattern.matcher(prevSeg).matches()) {
+					codeReturn.append(seg);
+					parentheses++;
+				}
+			}else if(")".equals(seg)){
+				if(parentheses > 0) {
+					codeReturn.append(seg);
+					parentheses--;
 				}
 			}else{
 				codeReturn.append(seg);
