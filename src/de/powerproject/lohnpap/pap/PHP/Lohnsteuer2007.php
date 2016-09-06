@@ -634,11 +634,11 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 	$this->VSP2=new BigDecimal(0);
 	$this->VMT=new BigDecimal(0);
 	self::$ZAHL11=new BigDecimal(11);
-	self::$ZAHL10=BigDecimal::$TEN;
+	self::$ZAHL10=BigDecimal::TEN();
 	self::$ZAHL12=new BigDecimal(12);
 	self::$TAB5=array(BigDecimal::valueOf (0), BigDecimal::valueOf (1900), BigDecimal::valueOf (1824), BigDecimal::valueOf (1748), BigDecimal::valueOf (1672), BigDecimal::valueOf (1596), BigDecimal::valueOf (1520), BigDecimal::valueOf (1444), BigDecimal::valueOf (1368), BigDecimal::valueOf (1292), BigDecimal::valueOf (1216), BigDecimal::valueOf (1140), BigDecimal::valueOf (1064), BigDecimal::valueOf (988), BigDecimal::valueOf (912), BigDecimal::valueOf (836), BigDecimal::valueOf (760), BigDecimal::valueOf (722), BigDecimal::valueOf (684), BigDecimal::valueOf (646), BigDecimal::valueOf (608), BigDecimal::valueOf (570), BigDecimal::valueOf (532), BigDecimal::valueOf (494), BigDecimal::valueOf (456), BigDecimal::valueOf (418), BigDecimal::valueOf (380), BigDecimal::valueOf (342), BigDecimal::valueOf (304), BigDecimal::valueOf (266), BigDecimal::valueOf (228), BigDecimal::valueOf (190), BigDecimal::valueOf (152), BigDecimal::valueOf (114), BigDecimal::valueOf (76), BigDecimal::valueOf (38), BigDecimal::valueOf (0));
 	self::$ZAHL100=new BigDecimal(100);
-	self::$ZAHL1=BigDecimal::$ONE;
+	self::$ZAHL1=BigDecimal::ONE();
 	self::$ZAHL2=new BigDecimal(2);
 	self::$ZAHL360=new BigDecimal(360);
 	self::$TAB4=array(BigDecimal::valueOf (0.0), BigDecimal::valueOf (0.4), BigDecimal::valueOf (0.384), BigDecimal::valueOf (0.368), BigDecimal::valueOf (0.352), BigDecimal::valueOf (0.336), BigDecimal::valueOf (0.32), BigDecimal::valueOf (0.304), BigDecimal::valueOf (0.288), BigDecimal::valueOf (0.272), BigDecimal::valueOf (0.256), BigDecimal::valueOf (0.24), BigDecimal::valueOf (0.224), BigDecimal::valueOf (0.208), BigDecimal::valueOf (0.192), BigDecimal::valueOf (0.176), BigDecimal::valueOf (0.16), BigDecimal::valueOf (0.152), BigDecimal::valueOf (0.144), BigDecimal::valueOf (0.136), BigDecimal::valueOf (0.128), BigDecimal::valueOf (0.12), BigDecimal::valueOf (0.112), BigDecimal::valueOf (0.104), BigDecimal::valueOf (0.096), BigDecimal::valueOf (0.088), BigDecimal::valueOf (0.08), BigDecimal::valueOf (0.072), BigDecimal::valueOf (0.064), BigDecimal::valueOf (0.056), BigDecimal::valueOf (0.048), BigDecimal::valueOf (0.04), BigDecimal::valueOf (0.032), BigDecimal::valueOf (0.024), BigDecimal::valueOf (0.016), BigDecimal::valueOf (0.008), BigDecimal::valueOf (0.0));
@@ -668,7 +668,7 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 		$this->JW= $this->LSTJAHR->multiply (self::$ZAHL100);
 		$this->UPANTEIL();
 		$this->LSTLZZ= $this->ANTEIL1;
-		if($this->ZKF->compareTo (BigDecimal::$ZERO) == 1) {
+		if($this->ZKF->compareTo (BigDecimal::ZERO()) == 1) {
 			$this->ZTABFB= $this->ZTABFB->add ($this->KFB);
 			$this->MLSTJAHR();
 			$this->JBMG= $this->ST;
@@ -683,9 +683,9 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 	/** Freibetraege fuer Versorgungsbezuege, Altersentlastungsbetrag (§39b Abs. 2 Satz 2 EStG), PAP Seite 10 */
 	protected function MRE4LZZ() {
 
-		if($this->VBEZ->compareTo (BigDecimal::$ZERO) == 0) {
-			$this->FVBZ= BigDecimal::$ZERO;
-			$this->FVB= BigDecimal::$ZERO;
+		if($this->VBEZ->compareTo (BigDecimal::ZERO()) == 0) {
+			$this->FVBZ= BigDecimal::ZERO();
+			$this->FVB= BigDecimal::ZERO();
 		} else {
 			if($this->VJAHR < 2006) {
 				$this->J= 1;
@@ -697,21 +697,21 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 				}
 			}
 			if($this->LZZ == 1) {
-				if((($this->STERBE->add ($this->VKAPA))->compareTo (BigDecimal::$ZERO)) == 1) {
-					$this->VBEZB= ($this->VBEZM->multiply (BigDecimal::valueOf ($this->ZMVB)))->add ($this->VBEZS);
+				if($this->STERBE->add ($this->VKAPA)->compareTo (BigDecimal::ZERO()) == 1) {
+					$this->VBEZB= $this->VBEZM->multiply (BigDecimal::valueOf ($this->ZMVB))->add ($this->VBEZS);
 					$this->HFVB= self::$TAB2[$this->J]->multiply (self::$ZAHL100);
 					$this->FVBZ= self::$TAB3[$this->J];
 				} else {
-					$this->VBEZB= ($this->VBEZM->multiply (BigDecimal::valueOf ($this->ZMVB)))->add ($this->VBEZS);/** Achtung! Rechengenauigkeit Division? */
+					$this->VBEZB= $this->VBEZM->multiply (BigDecimal::valueOf ($this->ZMVB))->add ($this->VBEZS);/** Achtung! Rechengenauigkeit Division? */
 					$this->HFVB= self::$TAB2[$this->J]->divide (self::$ZAHL12)->multiply (BigDecimal::valueOf ($this->ZMVB))->multiply (self::$ZAHL100);
 					$this->FVBZ= self::$TAB3[$this->J]->divide (self::$ZAHL12)->multiply (BigDecimal::valueOf ($this->ZMVB))->setScale (0, BigDecimal::$ROUND_UP);
 				}
 			} else {
-				$this->VBEZB= (($this->VBEZM->multiply (self::$ZAHL12))->add ($this->VBEZS))->setScale (2, BigDecimal::$ROUND_DOWN);
+				$this->VBEZB= $this->VBEZM->multiply (self::$ZAHL12)->add ($this->VBEZS)->setScale (2, BigDecimal::$ROUND_DOWN);
 				$this->HFVB= self::$TAB2[$this->J]->multiply (self::$ZAHL100);
 				$this->FVBZ= self::$TAB3[$this->J];
 			}
-			$this->FVB= ($this->VBEZB->multiply (self::$TAB1[$this->J]))->setScale (2, BigDecimal::$ROUND_UP);
+			$this->FVB= $this->VBEZB->multiply (self::$TAB1[$this->J])->setScale (2, BigDecimal::$ROUND_UP);
 			if($this->FVB->compareTo ($this->HFVB) == 1) {
 				$this->FVB = $this->HFVB;
 			}
@@ -720,7 +720,7 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 			$this->FVB= $this->ANTEIL2;
 		}
 		if($this->ALTER1 == 0) {
-			$this->ALTE= BigDecimal::$ZERO;
+			$this->ALTE= BigDecimal::ZERO();
 		} else {
 			if($this->AJAHR < 2006) {
 				$this->K= 1;
@@ -732,7 +732,7 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 				}
 			}
 			$this->BMG= $this->RE4->subtract ($this->VBEZ);
-			$this->ALTE= ($this->BMG->multiply (self::$TAB4[$this->K]))->setScale (2, BigDecimal::$ROUND_UP);
+			$this->ALTE= $this->BMG->multiply (self::$TAB4[$this->K])->setScale (2, BigDecimal::$ROUND_UP);
 			$this->JW= self::$TAB5[$this->K]->multiply (self::$ZAHL100);
 			$this->UPANTEIL();
 			if($this->ALTE->compareTo ($this->ANTEIL2) == 1) {
@@ -747,37 +747,37 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 		if($this->LZZ == 1) {
 			$this->ZRE4= $this->RE4LZZ->divide (self::$ZAHL100, 2, BigDecimal::$ROUND_DOWN);
 			$this->ZRE4VP= $this->RE4LZZV->divide (self::$ZAHL100, 2, BigDecimal::$ROUND_DOWN);
-			$this->ZVBEZ= ($this->VBEZ->subtract ($this->FVB))->divide (self::$ZAHL100, 2, BigDecimal::$ROUND_DOWN);
+			$this->ZVBEZ= $this->VBEZ->subtract ($this->FVB)->divide (self::$ZAHL100, 2, BigDecimal::$ROUND_DOWN);
 		} else {
 			if($this->LZZ == 2) {
-				$this->ZRE4= (($this->RE4LZZ->add (BigDecimal::valueOf (0.67)))->multiply (BigDecimal::valueOf (0.12)))->setScale (2, BigDecimal::$ROUND_DOWN);
-				$this->ZRE4VP= (($this->RE4LZZV->add (BigDecimal::valueOf (0.67)))->multiply (BigDecimal::valueOf (0.12)))->setScale(2, BigDecimal::$ROUND_DOWN);
-				$this->ZVBEZ= (($this->VBEZ->subtract ($this->FVB)->add (BigDecimal::valueOf (0.67)))->multiply (BigDecimal::valueOf (0.12)))->setScale (2, BigDecimal::$ROUND_DOWN);
+				$this->ZRE4= $this->RE4LZZ->add (BigDecimal::valueOf (0.67))->multiply (BigDecimal::valueOf (0.12))->setScale (2, BigDecimal::$ROUND_DOWN);
+				$this->ZRE4VP= $this->RE4LZZV->add (BigDecimal::valueOf (0.67))->multiply (BigDecimal::valueOf (0.12))->setScale(2, BigDecimal::$ROUND_DOWN);
+				$this->ZVBEZ= $this->VBEZ->subtract ($this->FVB)->add (BigDecimal::valueOf (0.67))->multiply (BigDecimal::valueOf (0.12))->setScale (2, BigDecimal::$ROUND_DOWN);
 			} else {
 				if($this->LZZ == 3) {
-					$this->ZRE4= (($this->RE4LZZ->add (BigDecimal::valueOf (0.89)))->multiply (BigDecimal::valueOf (3.6)))->divide (BigDecimal::valueOf (7.0), 2, BigDecimal::$ROUND_DOWN);
-					$this->ZRE4VP= (($this->RE4LZZV->add (BigDecimal::valueOf (0.89)))->multiply (BigDecimal::valueOf (3.6)))->divide (BigDecimal::valueOf (7.0), 2, BigDecimal::$ROUND_DOWN);
-					$this->ZVBEZ= (($this->VBEZ->subtract ($this->FVB)->add (BigDecimal::valueOf (0.89)))->multiply (BigDecimal::valueOf (3.6)))->divide (BigDecimal::valueOf (7.0), 2, BigDecimal::$ROUND_DOWN);
+					$this->ZRE4= $this->RE4LZZ->add (BigDecimal::valueOf (0.89))->multiply (BigDecimal::valueOf (3.6))->divide (BigDecimal::valueOf (7.0), 2, BigDecimal::$ROUND_DOWN);
+					$this->ZRE4VP= $this->RE4LZZV->add (BigDecimal::valueOf (0.89))->multiply (BigDecimal::valueOf (3.6))->divide (BigDecimal::valueOf (7.0), 2, BigDecimal::$ROUND_DOWN);
+					$this->ZVBEZ= $this->VBEZ->subtract ($this->FVB)->add (BigDecimal::valueOf (0.89))->multiply (BigDecimal::valueOf (3.6))->divide (BigDecimal::valueOf (7.0), 2, BigDecimal::$ROUND_DOWN);
 				} else {
-					$this->ZRE4= (($this->RE4LZZ->add (BigDecimal::valueOf (0.56)))->multiply (BigDecimal::valueOf (3.6)))->setScale (2, BigDecimal::$ROUND_DOWN);
-					$this->ZRE4VP= (($this->RE4LZZV->add (BigDecimal::valueOf (0.56)))->multiply (BigDecimal::valueOf (3.6)))->setScale (2, BigDecimal::$ROUND_DOWN);
-					$this->ZVBEZ= (($this->VBEZ->subtract ($this->FVB)->add (BigDecimal::valueOf (0.56)))->multiply (BigDecimal::valueOf (3.6)))->setScale (2, BigDecimal::$ROUND_DOWN);
+					$this->ZRE4= $this->RE4LZZ->add (BigDecimal::valueOf (0.56))->multiply (BigDecimal::valueOf (3.6))->setScale (2, BigDecimal::$ROUND_DOWN);
+					$this->ZRE4VP= $this->RE4LZZV->add (BigDecimal::valueOf (0.56))->multiply (BigDecimal::valueOf (3.6))->setScale (2, BigDecimal::$ROUND_DOWN);
+					$this->ZVBEZ= $this->VBEZ->subtract ($this->FVB)->add (BigDecimal::valueOf (0.56))->multiply (BigDecimal::valueOf (3.6))->setScale (2, BigDecimal::$ROUND_DOWN);
 				}
 			}
 		}
-		if($this->RE4LZZ->compareTo (BigDecimal::$ZERO) == -1) {
-			$this->ZRE4= BigDecimal::$ZERO;
+		if($this->RE4LZZ->compareTo (BigDecimal::ZERO()) == -1) {
+			$this->ZRE4= BigDecimal::ZERO();
 		}
-		if($this->RE4LZZV->compareTo (BigDecimal::$ZERO) == -1) {
-			$this->ZRE4VP= BigDecimal::$ZERO;
+		if($this->RE4LZZV->compareTo (BigDecimal::ZERO()) == -1) {
+			$this->ZRE4VP= BigDecimal::ZERO();
 		}
-		if($this->VBEZ->compareTo (BigDecimal::$ZERO) == 0) {
-			if($this->FVB->compareTo (BigDecimal::$ZERO) == 0) {
-				$this->ZVBEZ= BigDecimal::$ZERO;
+		if($this->VBEZ->compareTo (BigDecimal::ZERO()) == 0) {
+			if($this->FVB->compareTo (BigDecimal::ZERO()) == 0) {
+				$this->ZVBEZ= BigDecimal::ZERO();
 			}
 		} else {
-			if(($this->VBEZ->subtract ($this->FVB))->compareTo (BigDecimal::$ZERO) == -1) {
-				$this->ZVBEZ= BigDecimal::$ZERO;
+			if($this->VBEZ->subtract ($this->FVB)->compareTo (BigDecimal::ZERO()) == -1) {
+				$this->ZVBEZ= BigDecimal::ZERO();
 			}
 		}
 	}
@@ -785,16 +785,16 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 	/** Ermittlung der festen Tabellenfreibetraege (ohne Vorsorgepauschale), PAP Seite 13 */
 	protected function MZTABFB() {
 
-		$this->ANP= BigDecimal::$ZERO;
-		if($this->ZVBEZ->compareTo (BigDecimal::$ZERO) >= 0) {
+		$this->ANP= BigDecimal::ZERO();
+		if($this->ZVBEZ->compareTo (BigDecimal::ZERO()) >= 0) {
 			if($this->ZVBEZ->compareTo ($this->FVBZ) == -1) {
 				$this->FVBZ= $this->ZVBEZ->setScale (0, BigDecimal::$ROUND_DOWN);
 			}
 		}
 		if($this->STKL < 6) {
-			if($this->ZVBEZ->compareTo (BigDecimal::$ZERO) == 1) {
-				if(($this->ZVBEZ->subtract ($this->FVBZ))->compareTo (BigDecimal::valueOf (102)) == -1) {
-					$this->ANP= ($this->ZVBEZ->subtract ($this->FVBZ))->setScale (0, BigDecimal::$ROUND_DOWN);
+			if($this->ZVBEZ->compareTo (BigDecimal::ZERO()) == 1) {
+				if($this->ZVBEZ->subtract ($this->FVBZ)->compareTo (BigDecimal::valueOf (102)) == -1) {
+					$this->ANP= $this->ZVBEZ->subtract ($this->FVBZ)->setScale (0, BigDecimal::$ROUND_DOWN);
 				} else {
 					$this->ANP= BigDecimal::valueOf (102);
 				}
@@ -802,8 +802,8 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 		}
 		if($this->STKL < 6) {
 			if($this->ZRE4->compareTo ($this->ZVBEZ) == 1) {
-				if(($this->ZRE4->subtract ($this->ZVBEZ))->compareTo (BigDecimal::valueOf (920)) == -1) {
-					$this->ANP= ($this->ANP->add ($this->ZRE4)->subtract ($this->ZVBEZ))->setScale (0, BigDecimal::$ROUND_DOWN);
+				if($this->ZRE4->subtract ($this->ZVBEZ)->compareTo (BigDecimal::valueOf (920)) == -1) {
+					$this->ANP= $this->ANP->add ($this->ZRE4)->subtract ($this->ZVBEZ)->setScale (0, BigDecimal::$ROUND_DOWN);
 				} else {
 					$this->ANP= $this->ANP->add (BigDecimal::valueOf (920));
 				}
@@ -812,23 +812,23 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 		$this->KZTAB= 1;
 		if($this->STKL == 1) {
 			$this->SAP= BigDecimal::valueOf (36);
-			$this->KFB= ($this->ZKF->multiply (BigDecimal::valueOf (5808)))->setScale (0, BigDecimal::$ROUND_DOWN);
+			$this->KFB= $this->ZKF->multiply (BigDecimal::valueOf (5808))->setScale (0, BigDecimal::$ROUND_DOWN);
 		} else {
 			if($this->STKL == 2) {
 				$this->EFA= BigDecimal::valueOf (1308);
 				$this->SAP= BigDecimal::valueOf (36);
-				$this->KFB= ($this->ZKF->multiply (BigDecimal::valueOf (5808)))->setScale (0, BigDecimal::$ROUND_DOWN);
+				$this->KFB= $this->ZKF->multiply (BigDecimal::valueOf (5808))->setScale (0, BigDecimal::$ROUND_DOWN);
 			} else {
 				if($this->STKL == 3) {
 					$this->KZTAB= 2;
 					$this->SAP= BigDecimal::valueOf (72);
-					$this->KFB= ($this->ZKF->multiply (BigDecimal::valueOf (5808)))->setScale (0, BigDecimal::$ROUND_DOWN);
+					$this->KFB= $this->ZKF->multiply (BigDecimal::valueOf (5808))->setScale (0, BigDecimal::$ROUND_DOWN);
 				} else {
 					if($this->STKL == 4) {
 						$this->SAP= BigDecimal::valueOf (36);
-						$this->KFB= ($this->ZKF->multiply (BigDecimal::valueOf (2904)))->setScale (0, BigDecimal::$ROUND_DOWN);
+						$this->KFB= $this->ZKF->multiply (BigDecimal::valueOf (2904))->setScale (0, BigDecimal::$ROUND_DOWN);
 					} else {
-						$this->KFB= BigDecimal::$ZERO;
+						$this->KFB= BigDecimal::ZERO();
 					}
 				}
 			}
@@ -842,12 +842,12 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 		if($this->STKL < 5) {
 			$this->UPEVP();
 		} else {
-			$this->VSP= BigDecimal::$ZERO;
+			$this->VSP= BigDecimal::ZERO();
 		}
-		$this->ZVE= ($this->ZRE4->subtract ($this->ZTABFB)->subtract ($this->VSP))->setScale (0, BigDecimal::$ROUND_DOWN);
+		$this->ZVE= $this->ZRE4->subtract ($this->ZTABFB)->subtract ($this->VSP)->setScale (0, BigDecimal::$ROUND_DOWN);
 		if($this->ZVE->compareTo (self::$ZAHL1) == -1) {
-			$this->ZVE= BigDecimal::$ZERO;
-			$this->X= BigDecimal::$ZERO;
+			$this->ZVE= BigDecimal::ZERO();
+			$this->X= BigDecimal::ZERO();
 		} else {
 			$this->X= $this->ZVE->divide (BigDecimal::valueOf ($this->KZTAB), 0, BigDecimal::$ROUND_DOWN);
 		}
@@ -864,20 +864,20 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
     a) die Rentenversicherungsbemessungsgrenze gegenueber 2006 unveraendert bleibt und<br>
     b) der Beitragssatz zur Rentenversicherung auf 9,95 v.H. angehoben wird */
 		if($this->KRV == 1) {
-			$this->VSP1= BigDecimal::$ZERO;
+			$this->VSP1= BigDecimal::ZERO();
 		} else {
 			if($this->ZRE4VP->compareTo (BigDecimal::valueOf (63000)) == 1) {
 				$this->ZRE4VP= BigDecimal::valueOf (63000);
 			}
-			$this->VSP1= ($this->ZRE4VP->multiply (BigDecimal::valueOf (0.28)))->setScale (2, BigDecimal::$ROUND_DOWN);
-			$this->VSP1= ($this->VSP1->multiply (BigDecimal::valueOf (0.0995)))->setScale (2, BigDecimal::$ROUND_DOWN);
+			$this->VSP1= $this->ZRE4VP->multiply (BigDecimal::valueOf (0.28))->setScale (2, BigDecimal::$ROUND_DOWN);
+			$this->VSP1= $this->VSP1->multiply (BigDecimal::valueOf (0.0995))->setScale (2, BigDecimal::$ROUND_DOWN);
 		}
 		$this->VSP2= $this->ZRE4VP->multiply (BigDecimal::valueOf (0.11));
 		$this->VHB= BigDecimal::valueOf($this->KZTAB)->multiply(BigDecimal::valueOf (1500));
 		if($this->VSP2->compareTo ($this->VHB) == 1) {
 			$this->VSP2= $this->VHB;
 		}
-		$this->VSPN= ($this->VSP1->add ($this->VSP2))->setScale (0, BigDecimal::$ROUND_UP);
+		$this->VSPN= $this->VSP1->add ($this->VSP2)->setScale (0, BigDecimal::$ROUND_UP);
 		$this->MVSP();
 		if($this->VSPN->compareTo ($this->VSP) == 1) {
 			$this->VSP= $this->VSPN->setScale (2, BigDecimal::$ROUND_DOWN);
@@ -915,22 +915,22 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 		} else {
 			$this->VSPVOR= $this->VSPVOR->subtract ($this->ZRE4VP->multiply (BigDecimal::valueOf (0.16)));
 		}
-		if($this->VSPVOR->compareTo (BigDecimal::$ZERO) == -1) {
-			$this->VSPVOR= BigDecimal::$ZERO;
+		if($this->VSPVOR->compareTo (BigDecimal::ZERO()) == -1) {
+			$this->VSPVOR= BigDecimal::ZERO();
 		}
 		if($this->VSPO->compareTo ($this->VSPVOR) == 1) {
 			$this->VSP= $this->VSPVOR;
 			$this->VSPREST= $this->VSPO->subtract ($this->VSPVOR);
 			if($this->VSPREST->compareTo ($this->VSPMAX1) == 1) {
 				$this->VSP= $this->VSP->add ($this->VSPMAX1);
-				$this->VSPREST= ($this->VSPREST->subtract ($this->VSPMAX1))->divide (self::$ZAHL2, 2, BigDecimal::$ROUND_UP);
+				$this->VSPREST= $this->VSPREST->subtract ($this->VSPMAX1)->divide (self::$ZAHL2, 2, BigDecimal::$ROUND_UP);
 				if($this->VSPREST->compareTo ($this->VSPMAX2) == 1) {
-					$this->VSP= ($this->VSP->add ($this->VSPMAX2))->setScale (0, BigDecimal::$ROUND_DOWN);
+					$this->VSP= $this->VSP->add ($this->VSPMAX2)->setScale (0, BigDecimal::$ROUND_DOWN);
 				} else {
-					$this->VSP= ($this->VSP->add ($this->VSPREST))->setScale (0, BigDecimal::$ROUND_DOWN);
+					$this->VSP= $this->VSP->add ($this->VSPREST)->setScale (0, BigDecimal::$ROUND_DOWN);
 				}
 			} else {
-				$this->VSP= ($this->VSP->add ($this->VSPREST))->setScale (0, BigDecimal::$ROUND_DOWN);
+				$this->VSP= $this->VSP->add ($this->VSPREST)->setScale (0, BigDecimal::$ROUND_DOWN);
 			}
 		} else {
 			$this->VSP= $this->VSPO->setScale (0, BigDecimal::$ROUND_DOWN);
@@ -945,10 +945,10 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 			$this->ZX= BigDecimal::valueOf (25812);
 			$this->UP5_6();
 			if($this->ZZX->compareTo (BigDecimal::valueOf (200000)) == 1) {
-				$this->ST= ($this->ST->add (BigDecimal::valueOf (73158.96)))->setScale(0, BigDecimal::$ROUND_DOWN);;
-				$this->ST= ($this->ST->add (($this->ZZX->subtract (BigDecimal::valueOf (200000)))->multiply (BigDecimal::valueOf (0.45))))->setScale (0, BigDecimal::$ROUND_DOWN);
+				$this->ST= $this->ST->add (BigDecimal::valueOf (73158.96))->setScale(0, BigDecimal::$ROUND_DOWN);;
+				$this->ST= $this->ST->add ($this->ZZX->subtract (BigDecimal::valueOf (200000)))->multiply (BigDecimal::valueOf (0.45))->setScale (0, BigDecimal::$ROUND_DOWN);
 			} else {
-				$this->ST= ($this->ST->add (($this->ZZX->subtract (BigDecimal::valueOf (25812)))->multiply (BigDecimal::valueOf (0.42))))->setScale (0, BigDecimal::$ROUND_DOWN);
+				$this->ST= $this->ST->add ($this->ZZX->subtract (BigDecimal::valueOf (25812)))->multiply (BigDecimal::valueOf (0.42))->setScale (0, BigDecimal::$ROUND_DOWN);
 			}
 		} else {
 			$this->ZX= $this->ZZX;
@@ -957,7 +957,7 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 				$this->VERGL= $this->ST;
 				$this->ZX= BigDecimal::valueOf (9144);
 				$this->UP5_6();
-				$this->HOCH= ($this->ST->add (($this->ZZX->subtract (BigDecimal::valueOf (9144)))->multiply (BigDecimal::valueOf (0.42))))->setScale (0, BigDecimal::$ROUND_DOWN);
+				$this->HOCH= $this->ST->add ($this->ZZX->subtract (BigDecimal::valueOf (9144)))->multiply (BigDecimal::valueOf (0.42))->setScale (0, BigDecimal::$ROUND_DOWN);
 				if($this->HOCH->compareTo ($this->VERGL) == -1) {
 					$this->ST= $this->HOCH;
 				} else {
@@ -976,8 +976,8 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 		$this->X= $this->ZX->multiply (BigDecimal::valueOf (0.75));
 		$this->UPTAB07();
 		$this->ST2= $this->ST;
-		$this->DIFF= ($this->ST1->subtract ($this->ST2))->multiply (self::$ZAHL2);
-		$this->MIST= ($this->ZX->multiply (BigDecimal::valueOf (0.15)))->setScale (0, BigDecimal::$ROUND_DOWN);
+		$this->DIFF= $this->ST1->subtract ($this->ST2)->multiply (self::$ZAHL2);
+		$this->MIST= $this->ZX->multiply (BigDecimal::valueOf (0.15))->setScale (0, BigDecimal::$ROUND_DOWN);
 		if($this->MIST->compareTo ($this->DIFF) == 1) {
 			$this->ST= $this->MIST;
 		} else {
@@ -990,8 +990,8 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 
 		$this->SOLZFREI= BigDecimal::valueOf (972 * $this->KZTAB);
 		if($this->JBMG->compareTo ($this->SOLZFREI) == 1) {
-			$this->SOLZJ= ($this->JBMG->multiply (BigDecimal::valueOf (5.5)))->divide(self::$ZAHL100)->setScale(2, BigDecimal::$ROUND_DOWN);
-			$this->SOLZMIN= ($this->JBMG->subtract ($this->SOLZFREI))->multiply (BigDecimal::valueOf (20))->divide (self::$ZAHL100);
+			$this->SOLZJ= $this->JBMG->multiply (BigDecimal::valueOf (5.5))->divide(self::$ZAHL100)->setScale(2, BigDecimal::$ROUND_DOWN);
+			$this->SOLZMIN= $this->JBMG->subtract ($this->SOLZFREI)->multiply (BigDecimal::valueOf (20))->divide (self::$ZAHL100);
 			if($this->SOLZMIN->compareTo ($this->SOLZJ) == -1) {
 				$this->SOLZJ= $this->SOLZMIN;
 			}
@@ -999,14 +999,14 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 			$this->UPANTEIL();
 			$this->SOLZLZZ= $this->ANTEIL1;
 		} else {
-			$this->SOLZLZZ= BigDecimal::$ZERO;
+			$this->SOLZLZZ= BigDecimal::ZERO();
 		}
 		if($this->R > 0) {
 			$this->JW= $this->JBMG->multiply (self::$ZAHL100);
 			$this->UPANTEIL();
 			$this->BK= $this->ANTEIL1;
 		} else {
-			$this->BK= BigDecimal::$ZERO;
+			$this->BK= BigDecimal::ZERO();
 		}
 	}
 
@@ -1022,8 +1022,8 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 				$this->ANTEIL2= $this->JW->divide (self::$ZAHL12, 0, BigDecimal::$ROUND_UP);
 			} else {
 				if($this->LZZ == 3) {
-					$this->ANTEIL1= ($this->JW->multiply (self::$ZAHL7))->divide (self::$ZAHL360, 0, BigDecimal::$ROUND_DOWN);
-					$this->ANTEIL2= ($this->JW->multiply (self::$ZAHL7))->divide (self::$ZAHL360, 0, BigDecimal::$ROUND_UP);
+					$this->ANTEIL1= $this->JW->multiply (self::$ZAHL7)->divide (self::$ZAHL360, 0, BigDecimal::$ROUND_DOWN);
+					$this->ANTEIL2= $this->JW->multiply (self::$ZAHL7)->divide (self::$ZAHL360, 0, BigDecimal::$ROUND_UP);
 				} else {
 					$this->ANTEIL1= $this->JW->divide (self::$ZAHL360, 0, BigDecimal::$ROUND_DOWN);
 					$this->ANTEIL2= $this->JW->divide (self::$ZAHL360, 0, BigDecimal::$ROUND_UP);
@@ -1035,10 +1035,10 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 	/** Berechnung sonstiger Bezuege nach § 39b Abs. 3 Saetze 1 bis 7 EStG), PAP Seite 21 */
 	protected function MSONST() {
 
-		if($this->SONSTB->compareTo (BigDecimal::$ZERO) == 0) {
-			$this->STS= BigDecimal::$ZERO;
-			$this->SOLZS= BigDecimal::$ZERO;
-			$this->BKS= BigDecimal::$ZERO;
+		if($this->SONSTB->compareTo (BigDecimal::ZERO()) == 0) {
+			$this->STS= BigDecimal::ZERO();
+			$this->SOLZS= BigDecimal::ZERO();
+			$this->BKS= BigDecimal::ZERO();
 		} else {
 			$this->LZZ= 1;
 			$this->VBEZ= $this->JVBEZ;
@@ -1055,16 +1055,16 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 			$this->MLSTJAHR();
 			$this->LST2= $this->ST->multiply (self::$ZAHL100);
 			$this->STS= $this->LST2->subtract ($this->LST1);
-			if($this->SONSTB->compareTo (BigDecimal::$ZERO) == 1) {
-				if($this->STS->compareTo (BigDecimal::$ZERO) == -1) {
-					$this->STS= BigDecimal::$ZERO;
+			if($this->SONSTB->compareTo (BigDecimal::ZERO()) == 1) {
+				if($this->STS->compareTo (BigDecimal::ZERO()) == -1) {
+					$this->STS= BigDecimal::ZERO();
 				}
 			}
 			$this->SOLZS= $this->STS->multiply (BigDecimal::valueOf (5.5))->divide (self::$ZAHL100, 0, BigDecimal::$ROUND_DOWN);
 			if($this->R > 0) {
 				$this->BKS= $this->STS;
 			} else {
-				$this->BKS= BigDecimal::$ZERO;
+				$this->BKS= BigDecimal::ZERO();
 			}
 		}
 	}
@@ -1082,10 +1082,10 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 	/** Berechnung der Verguetung fuer mehrjaehrige Taetigkeit nach § 39b Abs. 3 Satz 9 EStG), PAP Seite 22 */
 	protected function MVMT() {
 
-		if($this->VKAPA->compareTo (BigDecimal::$ZERO) == -1) {
-			$this->VKAPA= BigDecimal::$ZERO;
+		if($this->VKAPA->compareTo (BigDecimal::ZERO()) == -1) {
+			$this->VKAPA= BigDecimal::ZERO();
 		}
-		if(($this->VMT->add ($this->VKAPA))->compareTo (BigDecimal::$ZERO) == 1) {
+		if($this->VMT->add ($this->VKAPA)->compareTo (BigDecimal::ZERO()) == 1) {
 			$this->LZZ= 1;
 			$this->VBEZ= $this->JVBEZ->add ($this->VBS);
 			$this->RE4= $this->JRE4->add ($this->SONSTB);
@@ -1107,11 +1107,11 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 			$this->VBEZS= $this->VBEZS->subtract ($this->VKAPA);
 			$this->RE4= $this->JRE4->add ($this->SONSTB);
 			$this->MRE4LZZ();
-			if(($this->RE4->subtract ($this->JFREIB)->add ($this->JHINZU))->compareTo (BigDecimal::$ZERO) == -1) {
+			if($this->RE4->subtract ($this->JFREIB)->add ($this->JHINZU)->compareTo (BigDecimal::ZERO()) == -1) {
 				$this->RE4= $this->RE4->subtract ($this->JFREIB)->add ($this->JHINZU);
-				$this->JFREIB= BigDecimal::$ZERO;
-				$this->JHINZU= BigDecimal::$ZERO;
-				$this->RE4= ($this->RE4->add ($this->VMT))->divide (self::$ZAHL5, 0, BigDecimal::$ROUND_DOWN);
+				$this->JFREIB= BigDecimal::ZERO();
+				$this->JHINZU= BigDecimal::ZERO();
+				$this->RE4= $this->RE4->add ($this->VMT)->divide (self::$ZAHL5, 0, BigDecimal::$ROUND_DOWN);
 				$this->MRE4LZZ2();
 				$this->MLSTJAHR();
 				$this->LST2= $this->ST->multiply (self::$ZAHL100);
@@ -1121,22 +1121,22 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 				$this->MRE4LZZ2();
 				$this->MLSTJAHR();
 				$this->LST2= $this->ST->multiply (self::$ZAHL100);
-				$this->STV= ($this->LST2->subtract ($this->LST1))->multiply (self::$ZAHL5);
+				$this->STV= $this->LST2->subtract ($this->LST1)->multiply (self::$ZAHL5);
 			}
 			$this->LST3= $this->LST3->subtract ($this->LST1);
 			if($this->LST3->compareTo ($this->STV) == -1) {
 				$this->STV= $this->LST3;
 			}
-			$this->SOLZV= ($this->STV->multiply (BigDecimal::valueOf (5.5)))->divide (self::$ZAHL100, 0, BigDecimal::$ROUND_DOWN);
+			$this->SOLZV= $this->STV->multiply (BigDecimal::valueOf (5.5))->divide (self::$ZAHL100, 0, BigDecimal::$ROUND_DOWN);
 			if($this->R > 0) {
 				$this->BKV= $this->STV;
 			} else {
-				$this->BKV= BigDecimal::$ZERO;
+				$this->BKV= BigDecimal::ZERO();
 			}
 		} else {
-			$this->STV= BigDecimal::$ZERO;
-			$this->SOLZV= BigDecimal::$ZERO;
-			$this->BKV= BigDecimal::$ZERO;
+			$this->STV= BigDecimal::ZERO();
+			$this->SOLZV= BigDecimal::ZERO();
+			$this->BKV= BigDecimal::ZERO();
 		}
 	}
 
@@ -1144,25 +1144,25 @@ class Lohnsteuer2007 implements LohnsteuerInterface {
 	protected function UPTAB07() {
 
 		if($this->X->compareTo (BigDecimal::valueOf (7665)) == -1) {
-			$this->ST= BigDecimal::$ZERO;
+			$this->ST= BigDecimal::ZERO();
 		} else {
 			if($this->X->compareTo (BigDecimal::valueOf (12740)) == -1) {
-				$this->Y= ($this->X->subtract (BigDecimal::valueOf (7664)))->divide (BigDecimal::valueOf (10000), 6, BigDecimal::$ROUND_DOWN);
+				$this->Y= $this->X->subtract (BigDecimal::valueOf (7664))->divide (BigDecimal::valueOf (10000), 6, BigDecimal::$ROUND_DOWN);
 				$this->RW= $this->Y->multiply (BigDecimal::valueOf (883.74));
 				$this->RW= $this->RW->add (BigDecimal::valueOf (1500));
-				$this->ST= ($this->RW->multiply ($this->Y))->setScale (0, BigDecimal::$ROUND_DOWN);
+				$this->ST= $this->RW->multiply ($this->Y)->setScale (0, BigDecimal::$ROUND_DOWN);
 			} else {
 				if($this->X->compareTo (BigDecimal::valueOf (52152)) == -1) {
-					$this->Y= ($this->X->subtract (BigDecimal::valueOf (12739)))->divide (BigDecimal::valueOf (10000), 6, BigDecimal::$ROUND_DOWN);
+					$this->Y= $this->X->subtract (BigDecimal::valueOf (12739))->divide (BigDecimal::valueOf (10000), 6, BigDecimal::$ROUND_DOWN);
 					$this->RW= $this->Y->multiply (BigDecimal::valueOf (228.74));
 					$this->RW= $this->RW->add (BigDecimal::valueOf (2397));
 					$this->RW= $this->RW->multiply ($this->Y);
-					$this->ST= ($this->RW->add (BigDecimal::valueOf (989)))->setScale (0, BigDecimal::$ROUND_DOWN);
+					$this->ST= $this->RW->add (BigDecimal::valueOf (989))->setScale (0, BigDecimal::$ROUND_DOWN);
 				} else {
 					if($this->X->compareTo (BigDecimal::valueOf (250001)) == -1) {
-						$this->ST= (($this->X->multiply (BigDecimal::valueOf (0.42)))->subtract (BigDecimal::valueOf (7914)))->setScale (0, BigDecimal::$ROUND_DOWN);
+						$this->ST= $this->X->multiply (BigDecimal::valueOf (0.42))->subtract (BigDecimal::valueOf (7914))->setScale (0, BigDecimal::$ROUND_DOWN);
 					} else {
-						$this->ST= (($this->X->multiply (BigDecimal::valueOf (0.45)))->subtract (BigDecimal::valueOf (15414)))->setScale (0, BigDecimal::$ROUND_DOWN);
+						$this->ST= $this->X->multiply (BigDecimal::valueOf (0.45))->subtract (BigDecimal::valueOf (15414))->setScale (0, BigDecimal::$ROUND_DOWN);
 					}
 				}
 			}
