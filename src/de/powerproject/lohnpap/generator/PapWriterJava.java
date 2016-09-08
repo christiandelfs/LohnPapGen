@@ -24,7 +24,7 @@ class PapWriterJava extends AbstractWriter {
 
 	public void writeWriter(PapFile p) throws IOException {
 
-		writeln("package de.powerproject.lohnpap.pap;");
+		writeln("package de.powerproject.lohnpap.pap.JAVA;");
 		writeln();
 		writeln("import java.math.BigDecimal;");
 		writeln();
@@ -42,7 +42,7 @@ class PapWriterJava extends AbstractWriter {
 	
 	public void writeWriterInterface() throws IOException {
 
-		writeln("package de.powerproject.lohnpap.pap;");
+		writeln("package de.powerproject.lohnpap.pap.JAVA;");
 		writeln();
 		writeln("import java.math.BigDecimal;");
 		writeln();
@@ -79,6 +79,11 @@ class PapWriterJava extends AbstractWriter {
 		return pre + " { return this." + name + "; }";
 	}
 	
+	public String writeGetMethodStub(String pre) {
+		String[] parts = pre.split(" ");
+		return pre + " { return " + ("int".equals(parts[1]) ? "0" : "null") + "; }// required for newer calculator";
+	}
+	
 	public String writeConstant(String type, String name, String value) {
 		return "protected static final " + type + " " + name + " = " + value + ";";
 	}
@@ -103,8 +108,8 @@ class PapWriterJava extends AbstractWriter {
 		return eval;
 	}
 	
-	public String writeVar(String type, String name, String def) {
-		return "protected " + type + " " + name + " = " + def + ";";
+	public String writeVar(String vis, String type, String name, String def) {
+		return vis + " " + type + " " + name + " = " + def + ";";
 	}
 	
 	public String writeOverride() {
