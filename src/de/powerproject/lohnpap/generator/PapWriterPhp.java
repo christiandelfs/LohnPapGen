@@ -85,6 +85,10 @@ class PapWriterPhp extends AbstractWriter {
 		return pre + " { return $this->" + name + "; }";
 	}
 	
+	public String writeGetMethodStub(String pre) {
+		return pre + " { return null; }// required for newer calculator";
+	}
+	
 	public String writeConstant(String type, String name, String value) {
 		return "protected static $" + name + ";";// = " + value + "
 	}
@@ -213,8 +217,8 @@ class PapWriterPhp extends AbstractWriter {
 		return segReturn;
 	}
 	
-	public String writeVar(String type, String name, String def) {
-		return "protected $" + name + ";";// = " + def + "
+	public String writeVar(String vis, String type, String name, String def) {
+		return vis + " $" + name + ";";// = " + def + "
 	}
 	
 	public String writeOverride() {
