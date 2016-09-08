@@ -19,7 +19,7 @@ public class Lohnsteuer {
 
 		if (name != null) {
 
-			return (LohnsteuerInterface)new CustomLoader().load("de.powerproject.lohnpap.pap.PapWriter"), new Class<?>[0], new Object[0]);
+			return (LohnsteuerInterface)new CustomLoader().load("de.powerproject.lohnpap.pap.JAVA.Lohnsteuer" + name, new Class<?>[0], new Object[0]);
 			
 		}
 
