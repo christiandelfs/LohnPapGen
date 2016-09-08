@@ -32,21 +32,21 @@ import org.w3c.dom.NodeList;
 
 import de.powerproject.lohnpap.generator.Generator;
 import de.powerproject.lohnpap.generator.PapFile;
-import de.powerproject.lohnpap.pap.Lohnsteuer;
-import de.powerproject.lohnpap.pap.Lohnsteuer2006;
-import de.powerproject.lohnpap.pap.Lohnsteuer2007;
-import de.powerproject.lohnpap.pap.Lohnsteuer2008;
-import de.powerproject.lohnpap.pap.Lohnsteuer2009;
-import de.powerproject.lohnpap.pap.Lohnsteuer2010;
-import de.powerproject.lohnpap.pap.Lohnsteuer2011;
-import de.powerproject.lohnpap.pap.Lohnsteuer2011Dezember;
-import de.powerproject.lohnpap.pap.Lohnsteuer2012;
-import de.powerproject.lohnpap.pap.Lohnsteuer2013;
-import de.powerproject.lohnpap.pap.Lohnsteuer2014;
-import de.powerproject.lohnpap.pap.Lohnsteuer2015;
-import de.powerproject.lohnpap.pap.Lohnsteuer2015Dezember;
-import de.powerproject.lohnpap.pap.Lohnsteuer2016;
-import de.powerproject.lohnpap.pap.LohnsteuerInterface;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2006;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2007;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2008;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2009;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2010;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2011;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2011Dezember;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2012;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2013;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2014;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2015;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2015Dezember;
+import de.powerproject.lohnpap.pap.JAVA.Lohnsteuer2016;
+import de.powerproject.lohnpap.pap.JAVA.LohnsteuerInterface;
 
 /**
  * 
@@ -87,133 +87,78 @@ public class LohnsteuerTest {
 	}
 
 	@Test
-	public void checkDuplicateEntry() {
-
-		Set<String> values = new HashSet<>();
-
-		boolean first = true;
-
-		for (PapFile pf : Generator.PAP_FILES) {
-
-			if (first) {
-
-				first = false;
-
-			} else {
-
-				assertNotNull("only first entry can be null", pf.getTo());
-
-				for (int i = pf.getFrom(); i <= pf.getTo(); i++) {
-
-					String id = pf.getYear() + " " + i;
-					assertTrue("duplicate entry " + id, values.add(id));
-				}
-			}
-		}
-	}
-
-	@Test
 	public void check2006() throws Exception {
-		checkLohnsteuer(Lohnsteuer2006.class, "2006", getDate(2006, 1, 1));
+		checkLohnsteuer(Lohnsteuer2006.class, "2006", "2006");
 	}
 
 	@Test
 	public void check2007() throws Exception {
-		checkLohnsteuer(Lohnsteuer2007.class, "2007", getDate(2007, 1, 1));
+		checkLohnsteuer(Lohnsteuer2007.class, "2007", "2007");
 	}
 
 	@Test
 	public void check2008() throws Exception {
-		checkLohnsteuer(Lohnsteuer2008.class, "2008", getDate(2008, 1, 1));
+		checkLohnsteuer(Lohnsteuer2008.class, "2008", "2008");
 	}
 
 	@Test
 	public void check2009() throws Exception {
-		checkLohnsteuer(Lohnsteuer2009.class, "2009", getDate(2009, 1, 1));
+		checkLohnsteuer(Lohnsteuer2009.class, "2009", "2009");
 	}
 
 	@Test
 	public void check2010() throws Exception {
-		checkLohnsteuer(Lohnsteuer2010.class, "2010", getDate(2010, 1, 1));
+		checkLohnsteuer(Lohnsteuer2010.class, "2010", "2010");
 	}
 
 	@Test
 	public void check2011() throws Exception {
-		checkLohnsteuer(Lohnsteuer2011.class, "2011bisNov", getDate(2011, 1, 1));
+		checkLohnsteuer(Lohnsteuer2011.class, "2011", "2011bisNov");
 	}
 
 	@Test
 	public void check2011Dezember() throws Exception {
-		checkLohnsteuer(Lohnsteuer2011Dezember.class, "2011Dez", getDate(2011, 12, 1));
+		checkLohnsteuer(Lohnsteuer2011Dezember.class, "2011Dezember", "2011Dez");
 	}
 
 	@Test
 	public void check2012() throws Exception {
-		checkLohnsteuer(Lohnsteuer2012.class, "2012", getDate(2012, 1, 1));
+		checkLohnsteuer(Lohnsteuer2012.class, "2012", "2012");
 	}
 
 	@Test
 	public void check2013() throws Exception {
-		checkLohnsteuer(Lohnsteuer2013.class, "2013", getDate(2013, 1, 1));
+		checkLohnsteuer(Lohnsteuer2013.class, "2013", "2013");
 	}
 
 	@Test
 	public void check2014() throws Exception {
-		checkLohnsteuer(Lohnsteuer2014.class, "2014", getDate(2014, 1, 1));
+		checkLohnsteuer(Lohnsteuer2014.class, "2014", "2014");
 	}
 
 	@Test
 	public void check2015() throws Exception {
-		checkLohnsteuer(Lohnsteuer2015.class, "2015bisNov", getDate(2015, 1, 1));
+		checkLohnsteuer(Lohnsteuer2015.class, "2015", "2015bisNov");
 	}
 
 	@Test
 	public void check2015Dezember() throws Exception {
-		checkLohnsteuer(Lohnsteuer2015Dezember.class, "2015Dez", getDate(2015, 12, 1));
+		checkLohnsteuer(Lohnsteuer2015Dezember.class, "2015Dezember", "2015Dez");
 	}
 
 	@Test
 	public void check2016() throws Exception {
-		checkLohnsteuer(Lohnsteuer2016.class, "2016V1", getDate(2016, 1, 1));
+		checkLohnsteuer(Lohnsteuer2016.class, "2016", "2016V1");
 	}
 
-	@Test
-	public void checkCurrent() throws Exception {
-
-		System.out.print("Lohnsteuer current");
-		printBlank("current");
-
-		PapFile pf = Generator.PAP_FILES.get(0);
-		assertTrue("first entry must be null", pf.getTo() == null);
-		assertEquals(CURRENT, Class.forName("de.powerproject.lohnpap.pap." + pf.getName()));
-		assertEquals(CURRENT, Lohnsteuer.getInstance().getClass());
-
-		System.out.print("...............................");
-	}
-
-	@Test
-	public void checkFuture() {
-
-		System.out.print("Lohnsteuer future");
-		printBlank("future");
-
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.YEAR, +3);
-		int year = cal.get(Calendar.YEAR);
-
-		assertEquals(CURRENT, Lohnsteuer.getInstance(getDate(year, 1, 1)).getClass());
-
-		System.out.print("...............................");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void checkInvalidDate() {
+	@Test(expected = ClassNotFoundException.class)
+	public void checkInvalidDate() throws Exception {
 
 		System.out.print("Lohnsteuer invalid");
 		printBlank("invalid");
 		System.out.print("...............................");
 
-		Lohnsteuer.getInstance(getDate(2000, 1, 1));
+		Lohnsteuer.getInstance("2000");
 	}
 
 	private void printBlank(String jsp) {
@@ -222,13 +167,13 @@ public class LohnsteuerTest {
 		}
 	}
 
-	private void checkLohnsteuer(Class<?> c, String jsp, Date testDate) throws Exception {
+	private void checkLohnsteuer(Class<?> c, String jsp, String urlv) throws Exception {
 
 		System.out.print("Lohnsteuer " + jsp);
 
 		printBlank(jsp);
 
-		LohnsteuerInterface li = Lohnsteuer.getInstance(testDate);
+		LohnsteuerInterface li = Lohnsteuer.getInstance(jsp);
 		assertNotNull(li);
 		assertEquals(c, li.getClass());
 
@@ -239,7 +184,7 @@ public class LohnsteuerTest {
 			BigDecimal re4 = new BigDecimal(lohn * 100); // Angabe in Cent
 
 			for (int stkl = 1; stkl <= 6; stkl++) {
-				check(c, jsp, 1, re4, stkl);
+				check(c, urlv, 1, re4, stkl);
 			}
 		}
 	}
@@ -256,11 +201,11 @@ public class LohnsteuerTest {
 	 * @throws Exception
 	 */
 
-	private void check(Class<?> c, String jsp, int lzz, BigDecimal re4, int stkl) throws Exception {
+	private void check(Class<?> c, String urlv, int lzz, BigDecimal re4, int stkl) throws Exception {
 
 		double anzKinder = stkl == 2 ? 1.5 : 0;
 
-		URL url = new URL("https://www.bmf-steuerrechner.de/interface/" + jsp + ".jsp?LZZ=" + lzz + "&RE4="
+		URL url = new URL("https://www.bmf-steuerrechner.de/interface/" + urlv + ".jsp?LZZ=" + lzz + "&RE4="
 				+ re4.intValue() + "&STKL=" + stkl + "&ZKF=" + anzKinder);
 
 		URLConnection con = url.openConnection();
@@ -279,10 +224,10 @@ public class LohnsteuerTest {
 		LohnsteuerInterface ls = (LohnsteuerInterface) constructor.newInstance();
 
 		// fill instance
-		ls.setLzz(lzz);
-		ls.setRe4(re4);
-		ls.setStkl(stkl);
-		ls.setZkf(new BigDecimal(anzKinder));
+		ls.setLZZ(lzz);
+		ls.setRE4(re4);
+		ls.setSTKL(stkl);
+		ls.setZKF(new BigDecimal(anzKinder));
 
 		// invoke main
 		ls.main();
@@ -301,7 +246,7 @@ public class LohnsteuerTest {
 
 			try {
 
-				Method m = c.getDeclaredMethod("get" + Generator.firstUpper(name));
+				Method m = c.getDeclaredMethod("get" + name);
 				Object o = m.invoke(ls);
 				if (o != null) {
 					o = o.toString();
