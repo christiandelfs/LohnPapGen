@@ -5,6 +5,8 @@
   </description>
   
   <property name="src" location="src/de/powerproject/lohnpap/generator"/>
+  <property name="srcPap" location="src/de/powerproject/lohnpap/pap"/>
+  <property name="srcTest" location="src/de/powerproject/lohnpap/test"/>
   <property name="bin" location="bin"/>
 	
   <target name="init" depends="clean">
@@ -14,6 +16,19 @@
 
   <target name="compile" depends="init" description="compile the source">
     <javac srcdir="${src}" destdir="${bin}" includeantruntime="false"/>
+  </target>
+
+  <target name="compilePap" depends="compile" description="compile the source">
+    <javac srcdir="${srcPap}" destdir="${bin}" includeantruntime="false"/>
+  </target>
+
+  <target name="compileTest" depends="compilePap" description="compile the source">
+    <javac srcdir="${srcTest}" destdir="${bin}" includeantruntime="false">
+    	<classpath>
+	        <pathelement path="lib/junit-4.12.jar"/>
+	        <pathelement path="bin"/>
+	    </classpath>
+    </javac>
   </target>
 
   <target name="clean" description="clean up">
