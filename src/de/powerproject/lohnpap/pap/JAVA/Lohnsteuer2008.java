@@ -1,11 +1,11 @@
-package de.powerproject.lohnpap.pap;
+package de.powerproject.lohnpap.pap.JAVA;
 
 import java.math.BigDecimal;
 
 /**
  * 
  * @author Marcel Lehmann (https://github.com/MarcelLehmann/Lohnsteuer) 
- * @date Mon Aug 15 15:06:01 CEST 2016
+ * @date Thu Sep 08 11:22:47 CEST 2016
  * 
  */
 
@@ -393,6 +393,36 @@ public class Lohnsteuer2008 implements LohnsteuerInterface {
 	@Override
 	public void setVMT(BigDecimal arg0) { this.VMT = arg0; }
 
+	@Override
+	public void setJRE4ENT(BigDecimal arg0) {  }// required for newer calculator
+
+	@Override
+	public void setPVS(int arg0) {  }// required for newer calculator
+
+	@Override
+	public void setKVZ(BigDecimal arg0) {  }// required for newer calculator
+
+	@Override
+	public void setPVZ(int arg0) {  }// required for newer calculator
+
+	@Override
+	public void setPKPV(BigDecimal arg0) {  }// required for newer calculator
+
+	@Override
+	public void setaf(int arg0) {  }// required for newer calculator
+
+	@Override
+	public void setf(double arg0) {  }// required for newer calculator
+
+	@Override
+	public void setSONSTENT(BigDecimal arg0) {  }// required for newer calculator
+
+	@Override
+	public void setPKV(int arg0) {  }// required for newer calculator
+
+	@Override
+	public void setENTSCH(BigDecimal arg0) {  }// required for newer calculator
+
 	/* GETTER */
 
 	@Override
@@ -422,6 +452,30 @@ public class Lohnsteuer2008 implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getSOLZS() { return this.SOLZS; }
 
+	@Override
+	public BigDecimal getVKVLZZ() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getWVFRBM() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getWVFRB() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVFRB() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getWVFRBO() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVKVSONST() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVFRBS2() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVFRBS1() {  return null; }// required for newer calculator
+
 
 	@Override
 	public BigDecimal getVSPREST() { return this.VSPREST; }
@@ -444,7 +498,6 @@ public class Lohnsteuer2008 implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getLST1() { return this.LST1; }
 
-	@Override
 	public BigDecimal getZRE4OSO() { return this.ZRE4OSO; }
 
 	@Override
@@ -465,7 +518,6 @@ public class Lohnsteuer2008 implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getLSTJAHR() { return this.LSTJAHR; }
 
-	@Override
 	public BigDecimal getZRE4VMT() { return this.ZRE4VMT; }
 
 	@Override
@@ -477,7 +529,6 @@ public class Lohnsteuer2008 implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getLSTSO() { return this.LSTSO; }
 
-	@Override
 	public BigDecimal getANTEIL2() { return this.ANTEIL2; }
 
 	@Override
@@ -501,7 +552,6 @@ public class Lohnsteuer2008 implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getVSP() { return this.VSP; }
 
-	@Override
 	public BigDecimal getZTABFBOSO() { return this.ZTABFBOSO; }
 
 	@Override
@@ -513,7 +563,6 @@ public class Lohnsteuer2008 implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getALTE() { return this.ALTE; }
 
-	@Override
 	public BigDecimal getFVBZOSO() { return this.FVBZOSO; }
 
 	@Override
@@ -582,7 +631,6 @@ public class Lohnsteuer2008 implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getST() { return this.ST; }
 
-	@Override
 	public BigDecimal getVSPKURZ() { return this.VSPKURZ; }
 
 	@Override
@@ -629,6 +677,51 @@ public class Lohnsteuer2008 implements LohnsteuerInterface {
 
 	@Override
 	public BigDecimal getZRE4J() { return this.ZRE4J; }
+
+	@Override
+	public BigDecimal getKVSATZAN() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getTBSVORV() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getKVSATZAG() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getPVSATZAG() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getRVSATZAN() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getPVSATZAN() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getBBGKVPV() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVKV() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getGFB() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getSTOVMT() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVSP3() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getW3STKL5() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getBBGRV() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getW2STKL5() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getW1STKL5() { return null; }// required for newer calculator
 
 	/** PROGRAMMABLAUFPLAN 2008, PAP Seite 10 */
 	@Override

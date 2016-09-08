@@ -1,11 +1,11 @@
-package de.powerproject.lohnpap.pap;
+package de.powerproject.lohnpap.pap.JAVA;
 
 import java.math.BigDecimal;
 
 /**
  * 
  * @author Marcel Lehmann (https://github.com/MarcelLehmann/Lohnsteuer) 
- * @date Mon Aug 15 15:06:01 CEST 2016
+ * @date Thu Sep 08 11:22:46 CEST 2016
  * 
  */
 

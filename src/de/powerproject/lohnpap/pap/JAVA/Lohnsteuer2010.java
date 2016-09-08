@@ -1,11 +1,11 @@
-package de.powerproject.lohnpap.pap;
+package de.powerproject.lohnpap.pap.JAVA;
 
 import java.math.BigDecimal;
 
 /**
  * 
  * @author Marcel Lehmann (https://github.com/MarcelLehmann/Lohnsteuer) 
- * @date Mon Aug 15 15:06:01 CEST 2016
+ * @date Thu Sep 08 11:22:47 CEST 2016
  * 
  */
 
@@ -333,7 +333,6 @@ public class Lohnsteuer2010 implements LohnsteuerInterface {
 	@Override
 	public void setVKAPA(BigDecimal arg0) { this.VKAPA = arg0; }
 
-	@Override
 	public void setF(double arg0) { this.F = arg0; }
 
 	@Override
@@ -381,7 +380,6 @@ public class Lohnsteuer2010 implements LohnsteuerInterface {
 	@Override
 	public void setSTKL(int arg0) { this.STKL = arg0; }
 
-	@Override
 	public void setAF(int arg0) { this.AF = arg0; }
 
 	@Override
@@ -420,6 +418,21 @@ public class Lohnsteuer2010 implements LohnsteuerInterface {
 	@Override
 	public void setENTSCH(BigDecimal arg0) { this.ENTSCH = arg0; }
 
+	@Override
+	public void setJRE4ENT(BigDecimal arg0) {  }// required for newer calculator
+
+	@Override
+	public void setKVZ(BigDecimal arg0) {  }// required for newer calculator
+
+	@Override
+	public void setaf(int arg0) {  }// required for newer calculator
+
+	@Override
+	public void setf(double arg0) {  }// required for newer calculator
+
+	@Override
+	public void setSONSTENT(BigDecimal arg0) {  }// required for newer calculator
+
 	/* GETTER */
 
 	@Override
@@ -448,6 +461,30 @@ public class Lohnsteuer2010 implements LohnsteuerInterface {
 
 	@Override
 	public BigDecimal getSOLZS() { return this.SOLZS; }
+
+	@Override
+	public BigDecimal getVKVLZZ() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getWVFRBM() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getWVFRB() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVFRB() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getWVFRBO() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVKVSONST() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVFRBS2() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVFRBS1() {  return null; }// required for newer calculator
 
 
 	@Override
@@ -510,7 +547,6 @@ public class Lohnsteuer2010 implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getLSTSO() { return this.LSTSO; }
 
-	@Override
 	public BigDecimal getANTEIL2() { return this.ANTEIL2; }
 
 	@Override
@@ -612,7 +648,6 @@ public class Lohnsteuer2010 implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getST() { return this.ST; }
 
-	@Override
 	public BigDecimal getVSPKURZ() { return this.VSPKURZ; }
 
 	@Override
@@ -659,6 +694,36 @@ public class Lohnsteuer2010 implements LohnsteuerInterface {
 
 	@Override
 	public BigDecimal getZRE4J() { return this.ZRE4J; }
+
+	@Override
+	public BigDecimal getTBSVORV() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getRVSATZAN() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getBBGKVPV() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVKV() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getGFB() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVSP3() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getW3STKL5() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getBBGRV() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getW2STKL5() { return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getW1STKL5() { return null; }// required for newer calculator
 
 	/** PROGRAMMABLAUFPLAN 2010, PAP Seite 10 */
 	@Override

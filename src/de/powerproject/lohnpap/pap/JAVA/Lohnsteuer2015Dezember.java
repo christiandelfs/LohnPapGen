@@ -1,11 +1,11 @@
-package de.powerproject.lohnpap.pap;
+package de.powerproject.lohnpap.pap.JAVA;
 
 import java.math.BigDecimal;
 
 /**
  * 
  * @author Marcel Lehmann (https://github.com/MarcelLehmann/Lohnsteuer) 
- * @date Mon Aug 15 15:06:01 CEST 2016
+ * @date Thu Sep 08 11:22:46 CEST 2016
  * 
  */
 
@@ -538,6 +538,24 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getSOLZS() { return this.SOLZS; }
 
+	@Override
+	public BigDecimal getWVFRBM() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getWVFRB() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVFRB() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getWVFRBO() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVFRBS2() {  return null; }// required for newer calculator
+
+	@Override
+	public BigDecimal getVFRBS1() {  return null; }// required for newer calculator
+
 
 	@Override
 	public BigDecimal getVSPREST() { return this.VSPREST; }
@@ -545,7 +563,6 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getZVBEZJ() { return this.ZVBEZJ; }
 
-	@Override
 	public BigDecimal getzveGemeinsam() { return this.zveGemeinsam; }
 
 	@Override
@@ -554,7 +571,6 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public int getKENNVMT() { return this.KENNVMT; }
 
-	@Override
 	public BigDecimal getJWBKN() { return this.JWBKN; }
 
 	@Override
@@ -590,7 +606,6 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getHOCH() { return this.HOCH; }
 
-	@Override
 	public BigDecimal getJWBKA() { return this.JWBKA; }
 
 	@Override
@@ -617,7 +632,6 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getANTEIL1() { return this.ANTEIL1; }
 
-	@Override
 	public int getSCHLEIFZ() { return this.SCHLEIFZ; }
 
 	@Override
@@ -638,13 +652,10 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getVSP() { return this.VSP; }
 
-	@Override
 	public BigDecimal getzveEkSt() { return this.zveEkSt; }
 
-	@Override
 	public BigDecimal getJWLSTA() { return this.JWLSTA; }
 
-	@Override
 	public BigDecimal getJWLSTN() { return this.JWLSTN; }
 
 	@Override
@@ -710,7 +721,6 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getJW() { return this.JW; }
 
-	@Override
 	public BigDecimal getJWSOLZN() { return this.JWSOLZN; }
 
 	@Override
@@ -719,7 +729,6 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getW2STKL5() { return this.W2STKL5; }
 
-	@Override
 	public BigDecimal getJWSOLZA() { return this.JWSOLZA; }
 
 	@Override
@@ -749,7 +758,6 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getST() { return this.ST; }
 
-	@Override
 	public BigDecimal getVSPKURZ() { return this.VSPKURZ; }
 
 	@Override
@@ -767,7 +775,6 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	@Override
 	public BigDecimal getJLFREIB() { return this.JLFREIB; }
 
-	@Override
 	public BigDecimal getZRE4VPM() { return this.ZRE4VPM; }
 
 	@Override
@@ -802,6 +809,9 @@ public class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 
 	@Override
 	public BigDecimal getZRE4J() { return this.ZRE4J; }
+
+	@Override
+	public BigDecimal getGFB() { return null; }// required for newer calculator
 
 	/** PROGRAMMABLAUFPLAN, PAP Seite 14 */
 	@Override
