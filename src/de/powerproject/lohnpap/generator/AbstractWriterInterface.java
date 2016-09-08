@@ -29,6 +29,8 @@ public interface AbstractWriterInterface {
 	
 	public String writeGetMethodDef(String pre, String name);
 	
+	public String writeGetMethodStub(String pre);
+	
 	public String writeConstant(String type, String name, String value);
 	
 	public String writeMainMethod();
@@ -41,7 +43,7 @@ public interface AbstractWriterInterface {
 	
 	public String writeEval(String eval);
 	
-	public String writeVar(String type, String name, String def);
+	public String writeVar(String vis, String type, String name, String def);
 	
 	public String writeOverride();
 	
