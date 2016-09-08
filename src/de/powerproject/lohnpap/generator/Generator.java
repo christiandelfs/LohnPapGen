@@ -41,7 +41,10 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class Generator {
 
-	private static boolean interfaceGenerated = true;
+	private static boolean interfaceGenerate = false;
+	private static final Map<String, String> inputInterfaceVars = new HashMap<>();
+	private static final Map<String, String> outputInterfaceVars = new HashMap<>();
+	private static final Map<String, String> internalInterfaceVars = new HashMap<>();
 	private static String codeLang = "PHP";
 	private static List<String> codeLangList = Arrays.asList( "JAVA", "PHP" );
 
@@ -54,14 +57,16 @@ public class Generator {
 		
 		File xmlDir = getFile(projectDir, "src", "de", "powerproject", "lohnpap", "xml");
 		File[] filesList = xmlDir.listFiles();
+		final int len = filesList.length;
 		
-        for(File f : filesList){
-            if(f.isFile() && f.getName().endsWith(".xml")){
-            	//interfaceGenerated = () ? false : true;
-            	interfaceGenerated = false;
+        //for(File f : filesList){
+        for(int i = len - 1;i >= 0;i--){
+            //if(f.isFile() && f.getName().endsWith(".xml")){
+        		File f = filesList[i];
+            	interfaceGenerate = (i == len - 1) ? true : false;
     			Generator g = new Generator(new PapFile(f.getName()), targetDir);
     			g.parse();
-            }
+            //}
         }
 
 		/*for (int i = 1; i < args.length; i++) {
@@ -110,9 +115,7 @@ public class Generator {
 		this.pf = pf;
 		this.path = path;
 		
-		if (interfaceGenerated) {
-			throw new Exception("interface generation only for current version! check config");
-		}else{
+		if (interfaceGenerate) {
 			Class<?>[] paramTypes = { String.class };
 			Object[] params = { getFilePath(path.getCanonicalPath(), "pap", codeLang, "LohnsteuerInterface." + codeLang.toLowerCase()) };
 			piw = (AbstractWriterInterface)new CustomLoader().load("de.powerproject.lohnpap.generator.PapWriter" + firstUpper(codeLang.toLowerCase()), paramTypes, params);
@@ -151,9 +154,6 @@ public class Generator {
     }
 	
 	private boolean variables, constants, methods, method;
-	private Map<String, String> inputInterfaceVars = new HashMap<>();
-	private Map<String, String> outputInterfaceVars = new HashMap<>();
-	private Map<String, String> internalInterfaceVars = new HashMap<>();
 	private Map<String, String> inputVars = new HashMap<>();
 	private Map<String, String> outputVars = new HashMap<>();
 	private Map<String, String> internalVars = new HashMap<>();
@@ -180,14 +180,6 @@ public class Generator {
 	
 			try {
 				if ("PAP".equals(qName)) {
-					inputInterfaceVars = new HashMap<>();
-					outputInterfaceVars = new HashMap<>();
-					internalInterfaceVars = new HashMap<>();
-					inputVars = new HashMap<>();
-					outputVars = new HashMap<>();
-					internalVars = new HashMap<>();
-					constVars = new HashMap<>();
-					otherVars = new HashMap<>();
 					String internalName = attributes.getValue("name");
 					Class<?>[] paramTypes = { PapFile.class, File.class, String.class };
 					Object[] params = { pf, getFile(path.getCanonicalPath(), "pap", codeLang), internalName };
@@ -217,9 +209,9 @@ public class Generator {
 							pw.appendln();
 							pw.writeln(pw.writeOverride());
 							if (internalVars.containsKey(name)) {
-								pw.writeln(pw.writeSetMethodDef(e.getValue(), internalVars.get(name)));
+								pw.writeln(pw.writeSetMethodDef(e.getValue(), name));
 							} else {
-								pw.writeln(e.getValue() + " { /* required for newer calculator */ }");
+								pw.writeln(e.getValue() + " {  }// required for newer calculator");
 							}
 						}
 					}
@@ -240,9 +232,9 @@ public class Generator {
 							pw.appendln();
 							pw.writeln(pw.writeOverride());
 							if (internalVars.containsKey(name)) {
-								pw.writeln(e.getValue() + " { return " + internalVars.get(name) + "; }");
+								pw.writeln(pw.writeGetMethodDef(e.getValue(), name));
 							} else {
-								pw.writeln(e.getValue() + " { /* required for newer calculator */ return null; }");
+								pw.writeln(e.getValue() + " {  return null; }// required for newer calculator");
 							}
 						}
 					}
@@ -250,11 +242,25 @@ public class Generator {
 					pw.appendln();
 	
 					for (Entry<String, String> e : internalVars.entrySet()) {
-						pw.appendln();
-						if (internalInterfaceVars.containsKey(e.getKey())) {
-							pw.writeln(pw.writeOverride());
+						if (!outputInterfaceVars.containsKey(e.getKey())) {
+							pw.appendln();
+							if (internalInterfaceVars.containsKey(e.getKey())) {
+								pw.writeln(pw.writeOverride());
+							}
+							pw.writeln(e.getValue());
 						}
-						pw.writeln(e.getValue());
+					}
+					for (Entry<String, String> e : internalInterfaceVars.entrySet()) {
+						String name = e.getKey();
+						if (!internalVars.containsKey(name)) {
+							pw.appendln();
+							pw.writeln(pw.writeOverride());
+							if (outputVars.containsKey(name)) {
+								pw.writeln(pw.writeGetMethodDef(e.getValue(), name));
+							} else {
+								pw.writeln(pw.writeGetMethodStub(e.getValue()));
+							}
+						}
 					}
 	
 					pw.appendln();
@@ -283,19 +289,21 @@ public class Generator {
 							String pre = pw.writeGetMethod(name, type);
 							internalVars.put(name, pw.writeGetMethodDef(pre, name));
 							printLastComment(pw);
+							//pw.writeln(pw.writeVar("public", type, name, def));
 							if (piw != null) {
 								piw.writeln(pre + ";");
 								internalInterfaceVars.put(name, pre);
 							}
 						}
-	
-						pw.writeln(pw.writeVar(type, name, def));
+						
+						pw.writeln(pw.writeVar("protected", type, name, def));
 	
 						if ("INPUT".equals(qName)) {
 							String uname = name;
 							String pre = pw.writeSetMethod(uname, type);
 							inputVars.put(uname, pw.writeSetMethodDef(pre, name));
 							printLastComment(piw);
+							//pw.writeln(pw.writeVar("protected", type, name, def));
 							if (piw != null) {
 								piw.writeln(pre + ";");
 								inputInterfaceVars.put(uname, pre);
@@ -305,6 +313,7 @@ public class Generator {
 							String pre = pw.writeGetMethod(uname, type);
 							outputVars.put(uname, pw.writeGetMethodDef(pre, name));
 							printLastComment(piw);
+							//pw.writeln(pw.writeVar("protected", type, name, def));
 							if (piw != null) {
 								piw.writeln(pre + ";");
 								outputInterfaceVars.put(uname, pre);
