@@ -332,7 +332,6 @@ class Lohnsteuer2010 implements LohnsteuerInterface {
 	
 	public function setVKAPA($arg0) { $this->VKAPA = $arg0; }
 
-	
 	public function setF($arg0) { $this->F = $arg0; }
 
 	
@@ -380,7 +379,6 @@ class Lohnsteuer2010 implements LohnsteuerInterface {
 	
 	public function setSTKL($arg0) { $this->STKL = $arg0; }
 
-	
 	public function setAF($arg0) { $this->AF = $arg0; }
 
 	
@@ -419,6 +417,21 @@ class Lohnsteuer2010 implements LohnsteuerInterface {
 	
 	public function setENTSCH($arg0) { $this->ENTSCH = $arg0; }
 
+	
+	public function setJRE4ENT($arg0) {  }// required for newer calculator
+
+	
+	public function setKVZ($arg0) {  }// required for newer calculator
+
+	
+	public function setaf($arg0) {  }// required for newer calculator
+
+	
+	public function setf($arg0) {  }// required for newer calculator
+
+	
+	public function setSONSTENT($arg0) {  }// required for newer calculator
+
 	/* GETTER */
 
 	
@@ -447,6 +460,30 @@ class Lohnsteuer2010 implements LohnsteuerInterface {
 
 	
 	public function getSOLZS() { return $this->SOLZS; }
+
+	
+	public function getVKVLZZ() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRBM() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRBO() {  return null; }// required for newer calculator
+
+	
+	public function getVKVSONST() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS2() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS1() {  return null; }// required for newer calculator
 
 
 	
@@ -509,7 +546,6 @@ class Lohnsteuer2010 implements LohnsteuerInterface {
 	
 	public function getLSTSO() { return $this->LSTSO; }
 
-	
 	public function getANTEIL2() { return $this->ANTEIL2; }
 
 	
@@ -611,7 +647,6 @@ class Lohnsteuer2010 implements LohnsteuerInterface {
 	
 	public function getST() { return $this->ST; }
 
-	
 	public function getVSPKURZ() { return $this->VSPKURZ; }
 
 	
@@ -658,6 +693,36 @@ class Lohnsteuer2010 implements LohnsteuerInterface {
 
 	
 	public function getZRE4J() { return $this->ZRE4J; }
+
+	
+	public function getTBSVORV() { return null; }// required for newer calculator
+
+	
+	public function getRVSATZAN() { return null; }// required for newer calculator
+
+	
+	public function getBBGKVPV() { return null; }// required for newer calculator
+
+	
+	public function getVKV() { return null; }// required for newer calculator
+
+	
+	public function getGFB() { return null; }// required for newer calculator
+
+	
+	public function getVSP3() { return null; }// required for newer calculator
+
+	
+	public function getW3STKL5() { return null; }// required for newer calculator
+
+	
+	public function getBBGRV() { return null; }// required for newer calculator
+
+	
+	public function getW2STKL5() { return null; }// required for newer calculator
+
+	
+	public function getW1STKL5() { return null; }// required for newer calculator
 
 	function __construct() {
 	$this->VSPREST=new BigDecimal(0);

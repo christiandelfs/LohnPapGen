@@ -500,6 +500,24 @@ class Lohnsteuer2015 implements LohnsteuerInterface {
 	
 	public function getSOLZS() { return $this->SOLZS; }
 
+	
+	public function getWVFRBM() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRBO() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS2() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS1() {  return null; }// required for newer calculator
+
 
 	
 	public function getVSPREST() { return $this->VSPREST; }
@@ -507,7 +525,6 @@ class Lohnsteuer2015 implements LohnsteuerInterface {
 	
 	public function getZVBEZJ() { return $this->ZVBEZJ; }
 
-	
 	public function getzveGemeinsam() { return $this->zveGemeinsam; }
 
 	
@@ -591,7 +608,6 @@ class Lohnsteuer2015 implements LohnsteuerInterface {
 	
 	public function getVSP() { return $this->VSP; }
 
-	
 	public function getzveEkSt() { return $this->zveEkSt; }
 
 	
@@ -684,7 +700,6 @@ class Lohnsteuer2015 implements LohnsteuerInterface {
 	
 	public function getST() { return $this->ST; }
 
-	
 	public function getVSPKURZ() { return $this->VSPKURZ; }
 
 	
@@ -731,6 +746,18 @@ class Lohnsteuer2015 implements LohnsteuerInterface {
 
 	
 	public function getZRE4J() { return $this->ZRE4J; }
+
+	
+	public function getGFB() { return null; }// required for newer calculator
+
+	
+	public function getW3STKL5() { return null; }// required for newer calculator
+
+	
+	public function getW2STKL5() { return null; }// required for newer calculator
+
+	
+	public function getW1STKL5() { return null; }// required for newer calculator
 
 	function __construct() {
 	$this->VSPREST=new BigDecimal(0);

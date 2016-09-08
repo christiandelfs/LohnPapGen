@@ -392,6 +392,36 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 	
 	public function setVMT($arg0) { $this->VMT = $arg0; }
 
+	
+	public function setJRE4ENT($arg0) {  }// required for newer calculator
+
+	
+	public function setPVS($arg0) {  }// required for newer calculator
+
+	
+	public function setKVZ($arg0) {  }// required for newer calculator
+
+	
+	public function setPVZ($arg0) {  }// required for newer calculator
+
+	
+	public function setPKPV($arg0) {  }// required for newer calculator
+
+	
+	public function setaf($arg0) {  }// required for newer calculator
+
+	
+	public function setf($arg0) {  }// required for newer calculator
+
+	
+	public function setSONSTENT($arg0) {  }// required for newer calculator
+
+	
+	public function setPKV($arg0) {  }// required for newer calculator
+
+	
+	public function setENTSCH($arg0) {  }// required for newer calculator
+
 	/* GETTER */
 
 	
@@ -421,6 +451,30 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 	
 	public function getSOLZS() { return $this->SOLZS; }
 
+	
+	public function getVKVLZZ() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRBM() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRBO() {  return null; }// required for newer calculator
+
+	
+	public function getVKVSONST() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS2() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS1() {  return null; }// required for newer calculator
+
 
 	
 	public function getVSPREST() { return $this->VSPREST; }
@@ -443,7 +497,6 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 	
 	public function getLST1() { return $this->LST1; }
 
-	
 	public function getZRE4OSO() { return $this->ZRE4OSO; }
 
 	
@@ -464,7 +517,6 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 	
 	public function getLSTJAHR() { return $this->LSTJAHR; }
 
-	
 	public function getZRE4VMT() { return $this->ZRE4VMT; }
 
 	
@@ -476,7 +528,6 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 	
 	public function getLSTSO() { return $this->LSTSO; }
 
-	
 	public function getANTEIL2() { return $this->ANTEIL2; }
 
 	
@@ -500,7 +551,6 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 	
 	public function getVSP() { return $this->VSP; }
 
-	
 	public function getZTABFBOSO() { return $this->ZTABFBOSO; }
 
 	
@@ -512,7 +562,6 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 	
 	public function getALTE() { return $this->ALTE; }
 
-	
 	public function getFVBZOSO() { return $this->FVBZOSO; }
 
 	
@@ -581,7 +630,6 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 	
 	public function getST() { return $this->ST; }
 
-	
 	public function getVSPKURZ() { return $this->VSPKURZ; }
 
 	
@@ -628,6 +676,51 @@ class Lohnsteuer2008 implements LohnsteuerInterface {
 
 	
 	public function getZRE4J() { return $this->ZRE4J; }
+
+	
+	public function getKVSATZAN() { return null; }// required for newer calculator
+
+	
+	public function getTBSVORV() { return null; }// required for newer calculator
+
+	
+	public function getKVSATZAG() { return null; }// required for newer calculator
+
+	
+	public function getPVSATZAG() { return null; }// required for newer calculator
+
+	
+	public function getRVSATZAN() { return null; }// required for newer calculator
+
+	
+	public function getPVSATZAN() { return null; }// required for newer calculator
+
+	
+	public function getBBGKVPV() { return null; }// required for newer calculator
+
+	
+	public function getVKV() { return null; }// required for newer calculator
+
+	
+	public function getGFB() { return null; }// required for newer calculator
+
+	
+	public function getSTOVMT() { return null; }// required for newer calculator
+
+	
+	public function getVSP3() { return null; }// required for newer calculator
+
+	
+	public function getW3STKL5() { return null; }// required for newer calculator
+
+	
+	public function getBBGRV() { return null; }// required for newer calculator
+
+	
+	public function getW2STKL5() { return null; }// required for newer calculator
+
+	
+	public function getW1STKL5() { return null; }// required for newer calculator
 
 	function __construct() {
 	$this->VSPREST=new BigDecimal(0);

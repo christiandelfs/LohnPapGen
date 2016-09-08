@@ -537,6 +537,24 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getSOLZS() { return $this->SOLZS; }
 
+	
+	public function getWVFRBM() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRBO() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS2() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS1() {  return null; }// required for newer calculator
+
 
 	
 	public function getVSPREST() { return $this->VSPREST; }
@@ -544,7 +562,6 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getZVBEZJ() { return $this->ZVBEZJ; }
 
-	
 	public function getzveGemeinsam() { return $this->zveGemeinsam; }
 
 	
@@ -553,7 +570,6 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getKENNVMT() { return $this->KENNVMT; }
 
-	
 	public function getJWBKN() { return $this->JWBKN; }
 
 	
@@ -589,7 +605,6 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getHOCH() { return $this->HOCH; }
 
-	
 	public function getJWBKA() { return $this->JWBKA; }
 
 	
@@ -616,7 +631,6 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getANTEIL1() { return $this->ANTEIL1; }
 
-	
 	public function getSCHLEIFZ() { return $this->SCHLEIFZ; }
 
 	
@@ -637,13 +651,10 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getVSP() { return $this->VSP; }
 
-	
 	public function getzveEkSt() { return $this->zveEkSt; }
 
-	
 	public function getJWLSTA() { return $this->JWLSTA; }
 
-	
 	public function getJWLSTN() { return $this->JWLSTN; }
 
 	
@@ -709,7 +720,6 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getJW() { return $this->JW; }
 
-	
 	public function getJWSOLZN() { return $this->JWSOLZN; }
 
 	
@@ -718,7 +728,6 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getW2STKL5() { return $this->W2STKL5; }
 
-	
 	public function getJWSOLZA() { return $this->JWSOLZA; }
 
 	
@@ -748,7 +757,6 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getST() { return $this->ST; }
 
-	
 	public function getVSPKURZ() { return $this->VSPKURZ; }
 
 	
@@ -766,7 +774,6 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 	
 	public function getJLFREIB() { return $this->JLFREIB; }
 
-	
 	public function getZRE4VPM() { return $this->ZRE4VPM; }
 
 	
@@ -801,6 +808,9 @@ class Lohnsteuer2015Dezember implements LohnsteuerInterface {
 
 	
 	public function getZRE4J() { return $this->ZRE4J; }
+
+	
+	public function getGFB() { return null; }// required for newer calculator
 
 	function __construct() {
 	$this->VSPREST=new BigDecimal(0);

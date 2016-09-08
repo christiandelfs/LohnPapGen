@@ -460,6 +460,9 @@ class Lohnsteuer2012 implements LohnsteuerInterface {
 	
 	public function setENTSCH($arg0) { $this->ENTSCH = $arg0; }
 
+	
+	public function setKVZ($arg0) {  }// required for newer calculator
+
 	/* GETTER */
 
 	
@@ -489,6 +492,30 @@ class Lohnsteuer2012 implements LohnsteuerInterface {
 	
 	public function getSOLZS() { return $this->SOLZS; }
 
+	
+	public function getVKVLZZ() { return $this->VKVLZZ; }
+
+	
+	public function getWVFRBM() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRBO() {  return null; }// required for newer calculator
+
+	
+	public function getVKVSONST() { return $this->VKVSONST; }
+
+	
+	public function getVFRBS2() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS1() {  return null; }// required for newer calculator
+
 
 	
 	public function getVSPREST() { return $this->VSPREST; }
@@ -496,7 +523,6 @@ class Lohnsteuer2012 implements LohnsteuerInterface {
 	
 	public function getZVBEZJ() { return $this->ZVBEZJ; }
 
-	
 	public function getzveGemeinsam() { return $this->zveGemeinsam; }
 
 	
@@ -557,9 +583,6 @@ class Lohnsteuer2012 implements LohnsteuerInterface {
 	public function getANTEIL1() { return $this->ANTEIL1; }
 
 	
-	public function getVKVLZZ() { return $this->VKVLZZ; }
-
-	
 	public function getVSPMAX2() { return $this->VSPMAX2; }
 
 	
@@ -577,11 +600,7 @@ class Lohnsteuer2012 implements LohnsteuerInterface {
 	
 	public function getVSP() { return $this->VSP; }
 
-	
 	public function getzveEkSt() { return $this->zveEkSt; }
-
-	
-	public function getVKVSONST() { return $this->VKVSONST; }
 
 	
 	public function getZX() { return $this->ZX; }
@@ -667,7 +686,6 @@ class Lohnsteuer2012 implements LohnsteuerInterface {
 	
 	public function getST() { return $this->ST; }
 
-	
 	public function getVSPKURZ() { return $this->VSPKURZ; }
 
 	
@@ -714,6 +732,30 @@ class Lohnsteuer2012 implements LohnsteuerInterface {
 
 	
 	public function getZRE4J() { return $this->ZRE4J; }
+
+	
+	public function getTBSVORV() { return null; }// required for newer calculator
+
+	
+	public function getRVSATZAN() { return null; }// required for newer calculator
+
+	
+	public function getBBGKVPV() { return null; }// required for newer calculator
+
+	
+	public function getGFB() { return null; }// required for newer calculator
+
+	
+	public function getW3STKL5() { return null; }// required for newer calculator
+
+	
+	public function getBBGRV() { return null; }// required for newer calculator
+
+	
+	public function getW2STKL5() { return null; }// required for newer calculator
+
+	
+	public function getW1STKL5() { return null; }// required for newer calculator
 
 	function __construct() {
 	$this->VSPREST=new BigDecimal(0);

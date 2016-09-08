@@ -296,7 +296,6 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	
 	public function setVJAHR($arg0) { $this->VJAHR = $arg0; }
 
-	
 	public function setHINZUR($arg0) { $this->HINZUR = $arg0; }
 
 	
@@ -341,8 +340,43 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	
 	public function setVMT($arg0) { $this->VMT = $arg0; }
 
-	
 	public function setWFUNDF($arg0) { $this->WFUNDF = $arg0; }
+
+	
+	public function setJRE4ENT($arg0) {  }// required for newer calculator
+
+	
+	public function setPVS($arg0) {  }// required for newer calculator
+
+	
+	public function setKVZ($arg0) {  }// required for newer calculator
+
+	
+	public function setPVZ($arg0) {  }// required for newer calculator
+
+	
+	public function setLZZFREIB($arg0) {  }// required for newer calculator
+
+	
+	public function setPKPV($arg0) {  }// required for newer calculator
+
+	
+	public function setaf($arg0) {  }// required for newer calculator
+
+	
+	public function setf($arg0) {  }// required for newer calculator
+
+	
+	public function setLZZHINZU($arg0) {  }// required for newer calculator
+
+	
+	public function setSONSTENT($arg0) {  }// required for newer calculator
+
+	
+	public function setPKV($arg0) {  }// required for newer calculator
+
+	
+	public function setENTSCH($arg0) {  }// required for newer calculator
 
 	/* GETTER */
 
@@ -372,6 +406,30 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 
 	
 	public function getSOLZS() { return $this->SOLZS; }
+
+	
+	public function getVKVLZZ() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRBM() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getVFRB() {  return null; }// required for newer calculator
+
+	
+	public function getWVFRBO() {  return null; }// required for newer calculator
+
+	
+	public function getVKVSONST() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS2() {  return null; }// required for newer calculator
+
+	
+	public function getVFRBS1() {  return null; }// required for newer calculator
 
 
 	
@@ -413,7 +471,6 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	
 	public function getZZX() { return $this->ZZX; }
 
-	
 	public function getANTEIL2() { return $this->ANTEIL2; }
 
 	
@@ -440,7 +497,6 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	
 	public function getEFA() { return $this->EFA; }
 
-	
 	public function getKENNZ() { return $this->KENNZ; }
 
 	
@@ -476,13 +532,11 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	
 	public function getVSPN() { return $this->VSPN; }
 
-	
 	public function getZRE4VP1() { return $this->ZRE4VP1; }
 
 	
 	public function getVSPO() { return $this->VSPO; }
 
-	
 	public function getRE4LZZV() { return $this->RE4LZZV; }
 
 	
@@ -491,7 +545,6 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	
 	public function getMIST() { return $this->MIST; }
 
-	
 	public function getRE4LZZ() { return $this->RE4LZZ; }
 
 	
@@ -509,7 +562,6 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 	
 	public function getST() { return $this->ST; }
 
-	
 	public function getVSPKURZ() { return $this->VSPKURZ; }
 
 	
@@ -541,6 +593,90 @@ class Lohnsteuer2006 implements LohnsteuerInterface {
 
 	
 	public function getVSP2() { return $this->VSP2; }
+
+	
+	public function getZVBEZJ() { return null; }// required for newer calculator
+
+	
+	public function getKVSATZAN() { return null; }// required for newer calculator
+
+	
+	public function getKENNVMT() { return null; }// required for newer calculator
+
+	
+	public function getTBSVORV() { return null; }// required for newer calculator
+
+	
+	public function getKVSATZAG() { return null; }// required for newer calculator
+
+	
+	public function getPVSATZAG() { return null; }// required for newer calculator
+
+	
+	public function getRVSATZAN() { return null; }// required for newer calculator
+
+	
+	public function getPVSATZAN() { return null; }// required for newer calculator
+
+	
+	public function getLSTSO() { return null; }// required for newer calculator
+
+	
+	public function getJLHINZU() { return null; }// required for newer calculator
+
+	
+	public function getBBGKVPV() { return null; }// required for newer calculator
+
+	
+	public function getVKV() { return null; }// required for newer calculator
+
+	
+	public function getGFB() { return null; }// required for newer calculator
+
+	
+	public function getHFVBZSO() { return null; }// required for newer calculator
+
+	
+	public function getSTOVMT() { return null; }// required for newer calculator
+
+	
+	public function getVSP3() { return null; }// required for newer calculator
+
+	
+	public function getW3STKL5() { return null; }// required for newer calculator
+
+	
+	public function getBBGRV() { return null; }// required for newer calculator
+
+	
+	public function getFVBZSO() { return null; }// required for newer calculator
+
+	
+	public function getHBALTE() { return null; }// required for newer calculator
+
+	
+	public function getFVBSO() { return null; }// required for newer calculator
+
+	
+	public function getW2STKL5() { return null; }// required for newer calculator
+
+	
+	public function getHFVBZ() { return null; }// required for newer calculator
+
+	
+	public function getW1STKL5() { return null; }// required for newer calculator
+
+	
+	public function getJLFREIB() { return null; }// required for newer calculator
+
+	
+	public function getVBEZBSO() { return null; }// required for newer calculator
+
+	
+	public function getLSTOSO() { return null; }// required for newer calculator
+
+	
+	public function getZRE4J() { return null; }// required for newer calculator
 
 	function __construct() {
 	$this->VSPREST=new BigDecimal(0);
